@@ -3,7 +3,7 @@
 
  <div class="field">
     <%= form.label :enviar_a %><br />
-    <%= form.text_field :email_receptor, autofocus: true, autocomplete: "email_receptor" %>
+    <%= form.collection_select :email_receptor, User.all, :email, :email %>
   </div>
 
  <div class="field">

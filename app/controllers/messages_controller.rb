@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
   
     def new
       @message = Message.new
+  
     end
     def create
       @message_params = params.require(:message).permit(:email_emisor, :email_receptor, :body)
