@@ -1,0 +1,19 @@
+<h1>Profiles</h1>
+
+<p><%= notice %></p>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= link_to 'Ver perfil', users_show_path(user.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

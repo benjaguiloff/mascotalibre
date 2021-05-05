@@ -1,0 +1,20 @@
+<h1>Crear Mensaje</h1>
+<%= form_with(model: @message, method: :post) do |form| %>
+
+ <div class="field">
+    <%= form.label :enviar_a %><br />
+    <%= form.text_field :email_receptor, autofocus: true, autocomplete: "email_receptor" %>
+  </div>
+
+ <div class="field">
+    <%= form.label :enviado_por %><br />
+    <%= form.text_field :email_emisor, autocomplete: "email_emisor" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mensaje %><br />
+    <%= form.text_field :body, autocomplete: "body" %>
+  </div>
+  <div class="action">
+  <%= form.submit "Crear mensaje"%>
+<% end %>

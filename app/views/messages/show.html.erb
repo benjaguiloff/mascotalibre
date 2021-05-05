@@ -1,0 +1,20 @@
+  <p><%= notice %></p>
+
+<p>
+    <strong>Email emisor:</strong>
+    <%= @message.email_receptor %>
+<p/>
+
+<p>
+    <strong>Email receptor:</strong>
+    <%= @message.email_emisor %>
+<p/>
+
+<p>
+    <strong>Mensaje:</strong>
+    <%= @message.body %>
+<p/>
+
+<p><%= link_to 'Volver', messages_index_path %></p>
+<p><%= link_to "Editar", messages_edit_path %></p>
+<p><%= link_to "Eliminar", messages_delete_path(@message.id), method: :delete %></p>

@@ -1,0 +1,22 @@
+<h1>Editar Mensaje</h1>
+
+<%= form_with(model: @message, method: :patch, url: messages_update_path) do |form| %>
+    <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+    </div>
+
+    <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+        <%= form.label :body %>
+        <%= form.text_field :body %>
+    </div>
+    <div class="action">
+        <%= form.submit "Editar Juego"%>
+    </div>
+<% end %>
+<%= link_to 'Volver', messages_show_path(@message.id) %>

@@ -1,0 +1,53 @@
+<h1>Mensajes</h1>
+
+<p><%= notice %></p>
+<h3>Mensajes recibidos</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Enviado por:</th>
+            <th>Mensaje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @messages.each do |mensaje| %>
+        <% if current_user.email == mensaje.email_receptor %>
+            <tr>
+                <td><%= mensaje.email_emisor %></td>
+                <td><%= mensaje.body %></td>
+                <td><%= link_to 'Responder', messages_new_path %></td>
+            </tr>
+        <% end %>   
+        <% end %>
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th>Enviado a:</th>
+            <th>Mensaje</th>
+        </tr>
+    </thead>
+<p>
+</p>
+<h3>Mensajes enviados</h3>
+    <tbody>
+        <% @messages.each do |mensaje| %>
+        <% if current_user.email == mensaje.email_emisor %>
+            <tr>
+                <td><%= mensaje.email_receptor %></td>
+                <td><%= mensaje.body %></td>
+                <td><%= link_to 'Ver Mensaje', messages_show_path(mensaje.id)%></td>
+            </tr>
+        <% end %>   
+        <% end %>
+    </tbody>
+</table>
+<div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+<p><%= link_to 'Subir nuevo mensaje', messages_new_path %></p>
+</div>
+<div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+<p><%= link_to "Página de inicio", welcome_index_path %></p>
+</div>
+
