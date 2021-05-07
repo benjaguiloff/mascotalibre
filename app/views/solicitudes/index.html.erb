@@ -1,0 +1,17 @@
+<h1>Solicitudes</h1>
+<% @solicitudes.each do |solicitude| %>
+    <h1>-----------------------------------------------------------------------</h1>
+    <% @users.each do |user| %>
+        <% if user.id == solicitude.id_user %>
+            <% @publications.each do |publication| %>
+                <% if publication.id == solicitude.id_publication %>
+                    <p>
+                        <%= user.name %> hizo una solicitud por la publicación <%= publication.title%>
+                    </p>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <p><strong><%= solicitude.content %></strong></p>
+    <h5> <%= link_to 'Ver detalles', solicitudes_show_path(solicitude.id) %> </h5>
+<% end %>

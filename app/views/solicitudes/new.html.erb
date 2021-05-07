@@ -1,0 +1,25 @@
+<h1>Nueva Solicitud</h1>
+<%= form_with(model: @solicitude, method: :post) do |form| %>
+
+    <div class="field">
+        <h4>¿Quién eres? </h4>
+        <%= form.collection_select :id_user, User.all, :id, :name %>
+    </div>
+
+    <div class="field">
+        <h4>Elige la publicación que quieres solicitar:</h4>
+        <%= form.collection_select :id_publication, Publication.all, :id, :title %>
+    </div>
+
+    <div class="field">
+        <h4>Escribe un mensaje:</h4>
+        <%= form.text_field :content %>
+    </div>
+
+    <h4></h4>
+
+    <div class="action">
+        <%= form.submit "Enviar solicitud"%>
+    </div>
+
+<% end %>

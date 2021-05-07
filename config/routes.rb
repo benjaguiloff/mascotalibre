@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
-  ##REVIEWS
+
+  ##################### Solicitudes ##################
+  #CREATE
+  get 'solicitudes/new', to: 'solicitudes#new', as: 'solicitudes_new'
+  post 'solicitudes', to: 'solicitudes#create'
+
+  #READ
+  get 'solicitudes/index', to: 'solicitudes#index', as: 'solicitudes_index'
+  get 'solicitudes/:id', to: 'solicitudes#show', as: 'solicitudes_show'
+
+  #UPDATE
+  get 'solicitudes/:id/edit', to: 'solicitudes#edit', as: 'solicitudes_edit'
+  patch 'solicitudes/:id', to: 'solicitudes#update', as: 'solicitudes_update'
+
+  #DELETE
+  delete 'solicitudes/:id', to: 'solicitudes#delete', as: 'solicitudes_delete'
+  
+
+  ##################### Reseñas ##################
   #CREATE
   get 'reviews/new', to: 'reviews#new', as: 'reviews_new'
   post 'reviews', to: 'reviews#create'
@@ -15,7 +33,7 @@ Rails.application.routes.draw do
   #DELETE
   delete 'reviews/:id', to: 'reviews#delete', as: 'reviews_delete'
 
-  ##MESSAGES
+  ##################### Mensajes ##################
   get 'messages/new', to: 'messages#new', as: 'messages_new'
 
   post 'messages', to: 'messages#create'
@@ -29,7 +47,7 @@ Rails.application.routes.draw do
 
   delete 'messages/:id', to: 'messages#delete', as: 'messages_delete'
   
-  ##USERS
+  ##################### Usuarios ##################
   get 'users/index'
   devise_for :users, controllers: {
         sessions: 'users/sessions', registrations: 'users/registrations'
