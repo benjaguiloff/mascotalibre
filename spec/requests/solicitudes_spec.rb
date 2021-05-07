@@ -6,26 +6,23 @@ RSpec.describe "Solicitudes", type: :request do
       get "/solicitudes/new"
       expect(response).to have_http_status(:success)
     end
-  end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/solicitudes/show"
-      expect(response).to have_http_status(:success)
+    it "should render new template" do
+      get "/solicitudes/new"
+      expect(response).to render_template(:new)
     end
   end
 
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/solicitudes/edit"
-      expect(response).to have_http_status(:success)
-    end
-  end
 
   describe "GET /index" do
     it "returns http success" do
       get "/solicitudes/index"
       expect(response).to have_http_status(:success)
+    end
+
+    it "should render index view" do
+      get "/solicitudes/index"
+      expect(response).to render_template(:index)
     end
   end
 
