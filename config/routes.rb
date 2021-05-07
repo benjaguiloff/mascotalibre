@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
+  ##REVIEWS
+  #CREATE
+  get 'reviews/new', to: 'reviews#new', as: 'reviews_new'
+  post 'reviews', to: 'reviews#create'
 
+  #READ
+  get 'reviews/index', to: 'reviews#index', as: 'reviews_index'
+  get 'reviews/:id', to: 'reviews#show', as: 'reviews_show'
+
+  #UPDATE
+  get 'reviews/:id/edit', to: 'reviews#edit', as: 'reviews_edit'
+  patch 'reviews/:id', to: 'reviews#update', as: 'reviews_update'
+
+  #DELETE
+  delete 'reviews/:id', to: 'reviews#delete', as: 'reviews_delete'
+
+  ##MESSAGES
   get 'messages/new', to: 'messages#new', as: 'messages_new'
+
   post 'messages', to: 'messages#create'
 
   get 'messages/index', to: 'messages#index', as: 'messages_index'
@@ -11,6 +28,8 @@ Rails.application.routes.draw do
   patch 'messages/:id', to: 'messages#update', as: 'messages_update'
 
   delete 'messages/:id', to: 'messages#delete', as: 'messages_delete'
+  
+  ##USERS
   get 'users/index'
   devise_for :users, controllers: {
         sessions: 'users/sessions', registrations: 'users/registrations'

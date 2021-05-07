@@ -22,6 +22,9 @@
       <%= link_to "Buzón de mensajes", messages_index_path %>
       </div>
       
+      <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+      <%= link_to "Reseñas", reviews_index_path %>
+      </div>
       
     <% else %>
       <%= link_to "Sign in", new_user_session_path, method: :get %>
