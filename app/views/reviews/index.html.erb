@@ -3,9 +3,10 @@
 <p><%= link_to 'Escribir nueva reseña', reviews_new_path %></p>
 </div>
 <% @reviews.each do |review| %>
+    <h1>-----------------------------------------------------------------------</h1>
+    <p><%= review.content %></p>
     <% @users.each do |user| %>
         <% if user.id == review.id_reviewed %>
-            <h1>-----------------------------------------------------------------------</h1>
             <p>
                 <strong>Reseña sobre:</strong> 
                 <%= user.name %>
@@ -16,9 +17,7 @@
                 <strong>Escrita por:</strong> 
                 <%= user.name %>
             </p>
-            <p><%= review.content %></p>
-            <h5> <%= link_to 'Ver detalles', reviews_show_path(review.id) %> </h5>
         <% end %>
-
     <% end %>
+    <h5> <%= link_to 'Ver detalles', reviews_show_path(review.id) %> </h5>
 <% end %>

@@ -1,0 +1,17 @@
+<% @users.each do |user| %>
+    <% if user.id == @solicitude.id_user %>
+        <% @publications.each do |publication| %>
+                <% if publication.id == @solicitude.id_publication %>
+                    <p>
+                        <%= user.name %> hizo una solicitud por la publicación <strong><%= publication.title%></strong>
+                    </p>
+                <% end %>
+        <% end %>
+    <% end %>
+    <p><strong>Comentario: </strong><%= @solicitude.content %></p>
+<% end %>
+
+
+<p> <%= link_to 'Volver', solicitudes_index_path %> </p>
+<p> <%= link_to 'Editar', solicitudes_edit_path(@solicitude.id) %> </p>
+<p> <%= link_to 'Eliminar', solicitudes_delete_path(@solicitude.id), method: :delete %> </p>
