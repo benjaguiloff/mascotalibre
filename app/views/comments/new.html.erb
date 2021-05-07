@@ -1,0 +1,16 @@
+<%= notice %>
+
+<h1>Nuevo comentario</h1>
+
+<%= form_with(model: @comment, method: :post) do |form| %>
+    <div class="field">
+        <%= form.label :Comentario %>
+        <%= form.text_field :contents %>
+    </div>
+
+    <div class="action">
+        <%= form.submit "Crear comentario" %>
+    </div>
+
+<p> <%= link_to 'Volver', publications_index_path %></p>
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Publicaciones</h1>
+
+<p> <%= notice%></p>
+
+<table>
+    <thead>
+        <tr>
+            <th> Título </th>
+            <th> Foto </th>
+            <th> Especie </th>
+            <th> Tipo </th>
+            <th> Precio </th>
+            <th> Dirección </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @publications.each do |publication| %>
+            <tr>
+                <td><%= publication.title %></td>
+                <td><%= image_tag(publication.image, style: "width:15%") %> </td>
+                <td><%= publication.species %></td>
+                <td><%= publication.typo %></td>
+                <td><%= publication.price %></td>
+                <td><%= publication.direction %></td>
+                <td><%= link_to 'Ver detalle', publications_show_path(publication.id)%></td>
+            </tr>
+        <% end%>
+    </tbody>
+</table>
+
+<%= link_to 'Inicio', publications_index_path%>
+<%= link_to 'Hacer nueva publicación', publications_new_path%>

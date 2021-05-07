@@ -1,0 +1,22 @@
+<h1>Comentarios</h1>
+
+<p> <%= notice%></p>
+
+<table>
+    <thead>
+        <tr>
+            <th> Comentarios </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @comments.each do |com| %>
+            <tr>
+                <td><%= com.contents %></td>
+                <td><%= link_to 'Ver detalle', comments_show_path(com.id)%></td>
+            </tr>
+        <% end%>
+    </tbody>
+</table>
+
+<%= link_to 'Ver publicaciones', publications_index_path%>

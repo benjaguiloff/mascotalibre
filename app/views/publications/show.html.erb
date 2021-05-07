@@ -1,0 +1,38 @@
+<p> <%= notice %></p>
+
+<h1>Viendo una publicación</h1>
+
+<p>
+    <strong> Título: </strong>
+    <%= @publication.title %>
+</p>
+
+<p>
+    <strong> Imagen: </strong>
+    <%= image_tag(@publication.image, style: "width:15%") %>
+</p>
+
+<p>
+    <strong> Especie: </strong>
+    <%= @publication.species %>
+</p>
+
+<p>
+    <strong> Tipo: </strong>
+    <%= @publication.typo %>
+</p>
+
+<p>
+    <strong> Precio: </strong>
+    <%= @publication.price %>
+</p>
+
+<p>
+    <strong> Dirección de entrega: </strong>
+    <%= @publication.direction %>
+</p>
+
+<p> <%= link_to 'Hacer un comentario', comments_new_path %></p>
+<p> <%= link_to 'Volver', publications_index_path %></p>
+<p> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
+<p> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>

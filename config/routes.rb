@@ -37,6 +37,39 @@ Rails.application.routes.draw do
   match '/users',   to: 'users#index',   via: 'get'
   match '/users/:id',     to: 'users#show',       via: 'get', as: 'users_show'
   get 'welcome/index'
+
+  ##################### Publicaciones ##################
+  # create
+  get 'publications/new', to: 'publications#new', as: 'publications_new'
+  post 'publications', to: 'publications#create'
+
+  # read
+  get 'publications/index', to: 'publications#index', as: 'publications_index'
+  get 'publications/:id', to: 'publications#show', as: 'publications_show'
+
+  # update
+  get 'publications/:id/edit', to: 'publications#edit', as: 'publications_edit'
+  patch 'publications/:id', to: 'publications#update', as: 'publications_update' 
+
+  # delete
+  delete 'publications/:id', to: 'publications#delete', as: 'publications_delete'
+
+   ##################### Comentarios ##################
+   get 'comments/new', to: 'comments#new', as: 'comments_new'
+   post 'comments', to: 'comments#create'
+ 
+   # read
+   get 'comments/index', to: 'comments#index', as: 'comments_index'
+   get 'comments/:id', to: 'comments#show', as: 'comments_show'
+ 
+   # update
+   get 'comments/:id/edit', to: 'comments#edit', as: 'comments_edit'
+   patch 'comments/:id', to: 'comments#update', as: 'comments_update' 
+ 
+   # delete
+   delete 'comments/:id', to: 'comments#delete', as: 'comments_delete'
+ 
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#index'
 end

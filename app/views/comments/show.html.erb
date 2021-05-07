@@ -1,0 +1,12 @@
+<p> <%= notice %></p>
+
+<h1>Viendo un comentario</h1>
+
+<p>
+    <strong> Comentario: </strong>
+    <%= @comment.contents %>
+</p>
+
+<p> <%= link_to 'Volver', comments_index_path %></p>
+<p> <%= link_to 'Editar', comments_edit_path(@comment.id) %></p>
+<p> <%= link_to 'Eliminar', comments_delete_path(@comment.id), method: :delete %></p>

@@ -1,0 +1,42 @@
+<%= notice %>
+
+<h1>Nueva publicación</h1>
+
+<%= form_with(model: @publication, method: :post) do |form| %>
+    <div class="field">
+        <%= form.label :Título %>
+        <%= form.text_field :title, autocomplete: "title" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Foto %>0
+        <%= form.file_field :image, autocomplete: "image" %> 
+    </div>
+
+    <div class="field">
+        <%= form.label :Especie %>
+        <%= form.text_field :species, autocomplete: "species" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Tipo %>
+        <%= form.text_field :typo, autocomplete: "typo" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Precio %>
+        <%= form.text_field :price, autocomplete: "price" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Dirección %>
+        <%= form.text_field :direction, autocomplete: "direction" %>
+    </div>
+
+    <div class="action">
+        <%= form.submit "Crear publicación" %>
+    </div>
+
+<%= link_to 'Cancelar', publications_index_path%>
+
+<% end %>

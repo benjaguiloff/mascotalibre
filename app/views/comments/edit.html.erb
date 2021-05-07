@@ -1,0 +1,17 @@
+<h1>Editando comentario</h1>
+
+<%= notice %>
+
+<%= form_with(model: @comment, method: :patch, url: comments_update_path) do |form| %>
+    <div class="field">
+        <%= form.label :Comentario %>
+        <%= form.text_field :contents %>
+    </div>
+
+    <div class="action">
+        <%= form.submit "Editar publicación" %>
+    </div>
+
+<%= link_to 'Cancelar', comments_show_path(@comment.id) %>
+<%= link_to 'Eliminar comentario', comments_delete_path(@comment.id), method: :delete %>
+<% end %>
