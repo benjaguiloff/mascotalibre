@@ -1,0 +1,24 @@
+<h1>Nueva Reseña</h1>
+<%= form_with(model: @review, method: :post) do |form| %>
+    <div class="field">
+        <h4>Contenido:</h4>
+        <%= form.text_field :content %>
+    </div>
+
+    <div class="field">
+        <h4>Reseña de:</h4>
+        <%= form.collection_select :id_reviewed, User.all, :id, :name %>
+    </div>
+
+    <div class="field">
+        <h4>Autor de esta reseña: </h4>
+        <%= form.collection_select :id_user, User.all, :id, :name %>
+    </div>
+
+    <h4></h4>
+
+    <div class="action">
+        <%= form.submit "Crear reseña"%>
+    </div>
+
+<% end %>

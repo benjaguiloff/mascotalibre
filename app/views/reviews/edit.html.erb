@@ -1,0 +1,27 @@
+<h1>Nueva Reseña</h1>
+<%= form_with(model: @review, method: :patch, url: reviews_update_path) do |form| %>
+    <div class="field">
+        <h4>Contenido:</h4>
+        <%= form.text_field :content %>
+    </div>
+
+    <div class="field">
+        <h4>Reseña de:</h4>
+        <%= form.collection_select :id_reviewed, User.all, :id, :name %>
+    </div>
+
+    <div class="field">
+        <h4>Autor de esta reseña: </h4>
+        <%= form.collection_select :id_user, User.all, :id, :name %>
+    </div>
+
+    <h4></h4>
+
+    <div class="action">
+        <%= form.submit "Actualizar reseña"%>
+    </div>
+
+<% end %>
+
+<p> <%= link_to 'Volver', reviews_show_path(@review.id) %> </p>
+<p> <%= link_to 'Listado de reseñas', reviews_index_path %> </p>
