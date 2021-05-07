@@ -6,27 +6,25 @@ RSpec.describe "Reviews", type: :request do
       get "/reviews/index"
       expect(response).to have_http_status(:success)
     end
-  end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/reviews/show"
-      expect(response).to have_http_status(:success)
+    it "should render index view" do
+      get "/reviews/index"
+      expect(response).to render_template(:index)
     end
   end
+
 
   describe "GET /new" do
     it "returns http success" do
       get "/reviews/new"
       expect(response).to have_http_status(:success)
     end
-  end
 
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/reviews/edit"
-      expect(response).to have_http_status(:success)
+    it "should render new template" do
+      get "/reviews/new"
+      expect(response).to render_template(:new)
     end
   end
+
 
 end
