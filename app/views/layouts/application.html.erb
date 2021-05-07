@@ -13,12 +13,22 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
     <% if current_user %>
+      <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
       <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <%= link_to "Edit", edit_user_registration_path, method: :get %>
-      <%= link_to "Profiles", users_path, method: :get %>
-      <%= link_to "Publicaciones", publications_index_path, method: :get %>
-      
       </div>
+
+      <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+      <%= link_to "Edit", edit_user_registration_path, method: :get %>
+      </div>
+
+      <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+      <%= link_to "Profiles", users_path, method: :get %>
+      </div>
+
+      <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
+      <%= link_to "Publicaciones", publications_index_path, method: :get %>
+      </div>
+      
       <div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
       <%= link_to "Buzón de mensajes", messages_index_path %>
       </div>
