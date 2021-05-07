@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def index
     @comments = Comment.all
@@ -38,7 +40,6 @@ class CommentsController < ApplicationController
   def delete
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to comments_index_path, notice: "El comentario ha sido eliminada"
-    end
+    redirect_to comments_index_path, notice: 'El comentario ha sido eliminada'
   end
-
+end

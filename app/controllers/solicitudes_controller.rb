@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SolicitudesController < ApplicationController
   def index
     @solicitudes = Solicitude.all
@@ -16,7 +18,8 @@ class SolicitudesController < ApplicationController
   end
 
   def create
-    @solicitude_params = params.require(:solicitude).permit(:content, :id_user, :id_publication, accepted: false)
+    @solicitude_params = params.require(:solicitude).permit(:content, :id_user, :id_publication,
+                                                            accepted: false)
     @solicitude = Solicitude.create(@solicitude_params)
     if @solicitude.save
       redirect_to solicitudes_index_path, notice: 'Solicitud enviada'
@@ -30,7 +33,8 @@ class SolicitudesController < ApplicationController
   end
 
   def update
-    @solicitudes_params = params.require(:solicitude).permit(:content, :id_user, :id_publication, accepted: false)
+    @solicitudes_params = params.require(:solicitude).permit(:content, :id_user, :id_publication,
+                                                             accepted: false)
     @solicitude = Solicitude.find(params[:id])
     if @solicitude.update(@solicitudes_params)
       redirect_to solicitudes_index_path, notice: 'Solicitud actualizada correctamente'
@@ -44,6 +48,4 @@ class SolicitudesController < ApplicationController
     @solicitude.destroy
     redirect_to solicitudes_index_path, notice: 'Solicitud eliminada'
   end
-
-
 end

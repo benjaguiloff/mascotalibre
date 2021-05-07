@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublicationsController < ApplicationController
   def index
     @publications = Publication.all
@@ -12,7 +14,8 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    @publication_params = params.require(:publication).permit(:title, :image, :species, :typo, :price, :direction)
+    @publication_params = params.require(:publication).permit(:title, :image, :species, :typo,
+                                                              :price, :direction)
     @publication = Publication.create(@publication_params)
     if @publication.save
       redirect_to publications_index_path, notice: 'Publicación creada correctamente'
@@ -27,7 +30,8 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = Publication.find(params[:id])
-    @publication_params = params.require(:publication).permit(:title, :image, :species, :typo, :price, :direction)
+    @publication_params = params.require(:publication).permit(:title, :image, :species, :typo,
+                                                              :price, :direction)
     if @publication.update(@publication_params)
       redirect_to publications_show_path, notice: 'Publicación editada correctamente'
     else
@@ -38,7 +42,6 @@ class PublicationsController < ApplicationController
   def delete
     @publication = Publication.find(params[:id])
     @publication.destroy
-    redirect_to publications_index_path, notice: "La publicación ha sido eliminada"
-    end
+    redirect_to publications_index_path, notice: 'La publicación ha sido eliminada'
   end
-
+end
