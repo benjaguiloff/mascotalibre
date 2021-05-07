@@ -1,0 +1,22 @@
+<% @users.each do |user| %>
+    <% if user.id == @review.id_reviewed %>
+        <p>
+            <strong>Reseña sobre:</strong> 
+            <%= user.name %>
+        </p>
+    <% end %>
+    <% if user.id == @review.id_user %>
+        <p>
+            <strong>Escrita por:</strong> 
+            <%= user.name %>
+        </p>
+        <p>
+            <strong>Reseña:</strong> 
+            <%= @review.content %>
+        </p>
+    <% end %>
+<% end %>
+
+<p> <%= link_to 'Volver', reviews_index_path %> </p>
+<p> <%= link_to 'Editar', reviews_edit_path(@review.id) %> </p>
+<p> <%= link_to 'Eliminar', reviews_delete_path(@review.id), method: :delete %> </p>
