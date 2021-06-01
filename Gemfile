@@ -73,3 +73,4 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'paperclip'
 
 gem 'simplecov', '~> 0.21.2'
+gem 'activeadmin', '~> 2.9'
