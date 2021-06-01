@@ -36,18 +36,12 @@ Rails.application.routes.draw do
   delete 'reviews/:id', to: 'reviews#delete', as: 'reviews_delete'
 
   ##################### Mensajes ##################
-  get 'messages/new', to: 'messages#new', as: 'messages_new'
-
-  post 'messages', to: 'messages#create'
-
-  get 'messages/index', to: 'messages#index', as: 'messages_index'
-
-  get 'messages/:id', to: 'messages#show', as: 'messages_show'
+  resources :conversations do
+    resources :messages
+  end
 
   get 'messages/:id/edit', to: 'messages#edit', as: 'messages_edit'
   patch 'messages/:id', to: 'messages#update', as: 'messages_update'
-
-  delete 'messages/:id', to: 'messages#delete', as: 'messages_delete'
 
   ##################### Usuarios ##################
   get 'users/index'

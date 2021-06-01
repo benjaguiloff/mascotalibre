@@ -1,53 +1,54 @@
-<h1>Mensajes</h1>
+<style>
+  .icon-flipped {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  }
+  .glyphicon.glyphicon-log-out {
+    font-size: 20px;
+}
+</style>
+<div class="panel panel-default">
+<% if @over_5 %>
+ <%= link_to 'Show All', '?m=all', class: 'btn btn-link pull-right' %>
+<% end %>
 
-<p><%= notice %></p>
-<h3>Mensajes recibidos</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Enviado por:</th>
-            <th>Mensaje</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <% @messages.each do |mensaje| %>
-        <% if current_user.email == mensaje.email_receptor %>
-            <tr>
-                <td><%= mensaje.email_emisor %></td>
-                <td><%= mensaje.body %></td>
-                <td><%= link_to 'Responder', messages_new_path %></td>
-            </tr>
-        <% end %>   
-        <% end %>
-    </tbody>
-</table>
-<table>
-    <thead>
-        <tr>
-            <th>Enviado a:</th>
-            <th>Mensaje</th>
-        </tr>
-    </thead>
-<p>
-</p>
-<h3>Mensajes enviados</h3>
-    <tbody>
-        <% @messages.each do |mensaje| %>
-        <% if current_user.email == mensaje.email_emisor %>
-            <tr>
-                <td><%= mensaje.email_receptor %></td>
-                <td><%= mensaje.body %></td>
-                <td><%= link_to 'Ver Mensaje', messages_show_path(mensaje.id)%></td>
-            </tr>
-        <% end %>   
-        <% end %>
-    </tbody>
-</table>
-<div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
-<p><%= link_to 'Enviar nuevo mensaje', messages_new_path %></p>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+ <% @messages.each do |message| %>
+  <% if message.body %>
+   <% user = User.find(message.user_id) %>
+   <div class="item">
+<div class="panel-heading">
+       <div class="header"><strong><%= user.name %> </strong><%= message.message_time %></div>
+      <div class="list">
+       <div class="item">
+        <i class="right triangle icon"></i>
+        <%= message.body %>
+        
+      </div>
+    </div>
+   </div>
+ </div>
+ <% end %>
+<% end %>
 </div>
-<div style="border: solid 3px; width: 150px; padding: 1px; align-text: center; margin: 1px;">
-<p><%= link_to "Página de inicio", welcome_index_path %></p>
 </div>
-
+<div class="col-md-10 col-md-offset-1">
+<%= form_for [@conversation, @message] do |f| %>
+<div class="form-group">
+  <%= f.text_area :body, class: "form-control" %>
+</div>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+<div class="form-group">
+  <%= f.submit "Enviar", class: "form-control btn btn-primary" %>
+</div>
+<div class="item"><h3>
+      <%= link_to "Volver", conversations_path %>
+     </h3></div>
+<% end %>
+</div>
