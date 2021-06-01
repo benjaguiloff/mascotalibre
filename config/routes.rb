@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   ##################### Solicitudes ##################
   # CREATE
   get 'solicitudes/new', to: 'solicitudes#new', as: 'solicitudes_new'
