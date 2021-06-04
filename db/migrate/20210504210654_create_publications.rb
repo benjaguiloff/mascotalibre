@@ -7,7 +7,7 @@ class CreatePublications < ActiveRecord::Migration[5.2]
       t.string :typo
       t.integer :price
       t.text :direction
-      t.string :accepted, default: "no"
+      t.string :accepted, default: "false"
 
       t.timestamps
     end

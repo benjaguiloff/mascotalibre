@@ -16,7 +16,7 @@
 
     <tbody>
         <% @publications.each do |publication| %>
-            <% if publication.accepted != "no" %>
+            <% if publication.accepted != "false" %>
                 <tr>
                     <td><%= publication.title %></td>
                     <td><%= image_tag(publication.image, style: "width:15%") %> </td>

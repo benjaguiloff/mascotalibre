@@ -16,7 +16,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Posts" do
           ul do
             Publication.all.map do |post|
-              if post.accepted == "no"
+              if post.accepted == "false"
                 li link_to(post.title, publications_edit_admin_path(post))
               else
                 li "#{post.title} (aceptada)"

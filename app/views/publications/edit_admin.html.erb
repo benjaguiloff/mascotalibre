@@ -34,8 +34,8 @@
     </div>
 
     <div class="field">
-        <%= form.label :Aceptar %><br />
-        <%= form.text_field :accepted %>
+        <h4>Aceptar/Rechazar publicación: </h4>
+        <%= form.collection_select :accepted, Fake.all, :accepted, :accepted %>
     </div>
 
 
