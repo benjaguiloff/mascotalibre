@@ -1,46 +1,31 @@
-# frozen_string_literal: true
-
 class MessagesController < ApplicationController
-  def index
-    @messages = Message.all
-  end
+    before_action do
+      @conversation = Conversation.find(params[:conversation_id])
+    end
+  
+    def index
+      @messages = @conversation.messages
+      @message = @conversation.messages.new
+    end
+    def new
+      @message = @conversation.messages.new
+    end
+  
+    def create
+      @message = @conversation.messages.new(message_params)
+      if @message.save
+        redirect_to conversation_messages_path(@conversation)
+      end
+    end
 
-  def show
-    @message = Message.find(params[:id])
-  end
-
-  def new
-    @message = Message.new
-  end
-
-  def create
-    @message_params = params.require(:message).permit(:email_emisor, :email_receptor, :body)
-    @message = Message.create(@message_params)
-    if @message.save
-      redirect_to messages_new_path, notice: 'Mensaje creado correctamente'
-    else
-      redirect_to messages_new_path, notice: 'Mensaje no creado'
+    def delete
+      @message = @conversation.messages.find(params[:id])
+      @message.destroy
+      redirect_to conversations_path, notice: 'El mensaje ha sido eliminada'
+    end
+    
+    private
+    def message_params
+      params.require(:message).permit(:body, :user_id)
     end
   end
-
-  def edit
-    @message = Message.find(params[:id])
-  end
-
-  def update
-    @message = Message.find(params[:id])
-    @messages_params = params.require(:message).permit(:email_emisor, :email_receptor, :body)
-
-    if @message.update(@messages_params)
-      redirect_to messages_index_path, notice: 'El mensaje ha sido editado correctamente'
-    else
-      redirect_to messages_index_path, notice: 'Error al editar el mensaje'
-    end
-  end
-
-  def delete
-    @message = Message.find(params[:id])
-    @message.destroy
-    redirect_to messages_index_path, notice: 'El mensaje ha sido eliminado'
-  end
-end

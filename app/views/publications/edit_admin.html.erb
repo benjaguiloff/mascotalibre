@@ -1,0 +1,48 @@
+<h1>Editando publicación</h1>
+
+<%= notice %>
+
+<%= form_with(model: @publication, method: :patch, url: publications_update_admin_path) do |form| %>
+    <div class="field">
+        <%= form.label :Título %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Foto%>
+        <%= form.file_field :image %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Especie%>
+        <%= form.text_field :species %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Tipo%>
+        <%= form.text_field :type %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Precio%>
+        <%= form.text_field :price %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Dirección%>
+        <%= form.text_field :direction %>
+    </div>
+
+    <div class="field">
+        <h4>Aceptar/Rechazar publicación: </h4>
+        <%= form.collection_select :accepted, Fake.all, :accepted, :accepted %>
+    </div>
+
+
+    <div class="action">
+        <%= form.submit "Editar publicación" %>
+    </div>
+
+<%= link_to 'Cancelar', publications_show_path(@publication.id) %>
+<%= link_to 'Eliminar publicación', publications_delete_path(@publication.id), method: :delete %>
+<% end %>

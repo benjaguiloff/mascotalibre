@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   ##################### Solicitudes ##################
   # CREATE
   get 'solicitudes/new', to: 'solicitudes#new', as: 'solicitudes_new'
@@ -34,18 +36,12 @@ Rails.application.routes.draw do
   delete 'reviews/:id', to: 'reviews#delete', as: 'reviews_delete'
 
   ##################### Mensajes ##################
-  get 'messages/new', to: 'messages#new', as: 'messages_new'
-
-  post 'messages', to: 'messages#create'
-
-  get 'messages/index', to: 'messages#index', as: 'messages_index'
-
-  get 'messages/:id', to: 'messages#show', as: 'messages_show'
+  resources :conversations do
+    resources :messages
+  end
 
   get 'messages/:id/edit', to: 'messages#edit', as: 'messages_edit'
   patch 'messages/:id', to: 'messages#update', as: 'messages_update'
-
-  delete 'messages/:id', to: 'messages#delete', as: 'messages_delete'
 
   ##################### Usuarios ##################
   get 'users/index'
@@ -67,7 +63,9 @@ Rails.application.routes.draw do
 
   # update
   get 'publications/:id/edit', to: 'publications#edit', as: 'publications_edit'
+  get 'publications/:id/edit_admin', to: 'publications#edit_admin', as: 'publications_edit_admin'
   patch 'publications/:id', to: 'publications#update', as: 'publications_update'
+  patch 'publications/update_admin/:id', to: 'publications#update_admin', as: 'publications_update_admin'
 
   # delete
   delete 'publications/:id', to: 'publications#delete', as: 'publications_delete'
