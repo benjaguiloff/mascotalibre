@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 2021_06_01_141105) do
+ActiveRecord::Schema.define(version: 2021_06_04_210353) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(version: 2021_06_01_141105) do
     t.datetime "updated_at", null: false
   end
 
+
+  create_table "fakes", force: :cascade do |t|
+    t.string "accepted"
+
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -94,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_141105) do
     t.string "typo"
     t.integer "price"
     t.text "direction"
+    t.string "accepted", default: "no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

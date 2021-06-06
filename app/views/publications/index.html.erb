@@ -16,15 +16,17 @@
 
     <tbody>
         <% @publications.each do |publication| %>
-            <tr>
-                <td><%= publication.title %></td>
-                <td><%= image_tag(publication.image, style: "width:15%") %> </td>
-                <td><%= publication.species %></td>
-                <td><%= publication.typo %></td>
-                <td><%= publication.price %></td>
-                <td><%= publication.direction %></td>
-                <td><%= link_to 'Ver detalle', publications_show_path(publication.id)%></td>
-            </tr>
+            <% if publication.accepted != "false" %>
+                <tr>
+                    <td><%= publication.title %></td>
+                    <td><%= image_tag(publication.image, style: "width:15%") %> </td>
+                    <td><%= publication.species %></td>
+                    <td><%= publication.typo %></td>
+                    <td><%= publication.price %></td>
+                    <td><%= publication.direction %></td>
+                    <td><%= link_to 'Ver detalle', publications_show_path(publication.id)%></td>
+                </tr>
+            <% end%>
         <% end%>
     </tbody>
 </table>

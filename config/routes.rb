@@ -63,7 +63,9 @@ Rails.application.routes.draw do
 
   # update
   get 'publications/:id/edit', to: 'publications#edit', as: 'publications_edit'
+  get 'publications/:id/edit_admin', to: 'publications#edit_admin', as: 'publications_edit_admin'
   patch 'publications/:id', to: 'publications#update', as: 'publications_update'
+  patch 'publications/update_admin/:id', to: 'publications#update_admin', as: 'publications_update_admin'
 
   # delete
   delete 'publications/:id', to: 'publications#delete', as: 'publications_delete'
