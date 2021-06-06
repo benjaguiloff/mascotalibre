@@ -14,4 +14,16 @@ RSpec.describe 'Messages', type: :request do
       expect(response).to render_template(:index)
     end
   end
+
+  describe 'GET /new' do
+    it 'returns http success' do
+      get '/messages/new'
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders new view' do
+      get '/messages/new'
+      expect(response).to render_template(:new)
+    end
+  end
 end

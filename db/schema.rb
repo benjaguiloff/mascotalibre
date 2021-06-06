@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
     t.string "typo"
     t.integer "price"
     t.text "direction"
-    t.string "accepted", default: "false"
+    t.string "accepted", default: "no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
