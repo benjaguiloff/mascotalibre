@@ -14,4 +14,21 @@
 
 <h1>Mascota-Libre</h1>
 
-<button><%= link_to "Iniciar Sesión", new_user_session_path, method: :get %></button>
+<div class="row" style="width:95%; margin-left: auto; margin-right: auto;">
+    <% @publications.each do |publication| %>
+        <% if publication.accepted != "false" %>
+            <div class="col-sm-6 col-md-4" style="width:33%;">
+                <div class="thumbnail" style="border-style:solid; border-width:7px; border-color: black;">
+                    <%= image_tag(publication.image, style: "height:180px; width:95%; border-style:solid; border-width:medium; border-color: #323233;") %>
+                    <div class="caption">
+                        <h2 style="margin-bottom:1px"><strong><%= publication.title %></strong></h2>
+                        <h3 style="margin-top:1px"><%= publication.typo %></h3>
+                        <p><strong>Especie:</strong> <%= publication.species %></p>
+                        <p><strong>Precio:</strong> <%= publication.price %></p>
+                        <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                    </div>
+                </div>
+            </div>
+        <% end%>
+    <% end%>
+</div>

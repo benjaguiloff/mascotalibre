@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 class WelcomeController < ApplicationController
-  def index; end
+  def index
+    @publications = Publication.all
+  end
 end
