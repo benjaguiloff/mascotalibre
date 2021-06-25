@@ -1,1 +1,17 @@
-<h1>MascotaLibre</h1>
+<% if notice %>
+    <div class="alert alert-success" role="alert">
+        <p class="notice"><%= notice %></p>
+    </div>
+<% end %>
+
+<% if alert %>
+    <div class="alert alert-danger" role="alert">
+        <p class="alert"><%= alert %></p>
+    </div>
+<% end %>
+
+
+
+<h1>Mascota-Libre</h1>
+
+<button><%= link_to "Iniciar Sesión", new_user_session_path, method: :get %></button>

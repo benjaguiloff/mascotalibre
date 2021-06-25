@@ -1,28 +1,42 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container" style="border-style:solid; border-width:medium; border-color: #323233; background-color: #D1E8E2;">
+  <div>
+    <h1><strong>INICIO DE SESIÓN</strong></h1> <button><%= link_to 'Admin Log in', admin_user_session_path %></button>
   </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <div class="field" style="margin-top: 5px; margin-left: auto; margin-right: auto; text-align: center;">
+        <h3><%= f.label :email %><br /></h3>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="field" style="margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <h3><%= f.label :contraseña %><br /></h3>
+      <%= f.password_field :password, autocomplete: "current-password" %>
     </div>
+
+    
+    <% if devise_mapping.rememberable? %>
+      <div class="field" style="margin-top: 15px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+
+    <div class="actions" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= f.submit "Entrar" %>
+    </div>
+
   <% end %>
 
-  <td><%= link_to 'Admin Log in', admin_user_session_path %></td>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div style="margin-left: auto; margin-right: auto; text-align: center; margin-top:5px; margin-bottom:30px;">
+    <%= render "users/shared/links" %>
   </div>
-<% end %>
+</div>
 
-<%= render "users/shared/links" %>
+
+<% if alert %>
+    <div class="alert alert-danger" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+        <%= alert %>
+    </div>
+<% end %>
