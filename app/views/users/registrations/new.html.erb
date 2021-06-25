@@ -1,46 +1,65 @@
-<div class="container" style=" border-style:solid; border-width:medium; border-color: #323233; background-color: #D1E8E2;">
+<% if alert %>
+  <div class="alert alert-danger" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= alert %>
+  </div>
+<% end %>
+
+<div class="container" style="width:40%; border-style:solid; border-width:15px; border-color: white; border-radius:5%; background-color: #1F2833;">
   <div>
-    <h1><strong>Crea tu cuenta</strong></h1> 
+    <h1 style="color:white;"><strong>Crea tu cuenta</strong></h1> 
   </div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {multipart: true}) do |f|  %>
 
     <div class="field">
-      <h3><%= f.label :email %><br /></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :email %><br /></h3>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
     <div class="field">
-      <h3><%= f.label :nombre %><br /></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :nombre %><br /></h3>
       <%= f.text_field :name, autocomplete: "name" %>
     </div>
 
     <div class="field">
-      <h3><%= f.label :teléfono %><br /></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :teléfono %><br /></h3>
       <%= f.text_field :phone, autocomplete: "phone" %>
     </div>
 
     <div class="field">
-      <h3><%= f.label :foto_de_perfil %><br /></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :foto_de_perfil %><br /></h3>
       <%= f.file_field :image, autocomplete: "image", :required => true %>
     </div>
     
     <div class="field">
-      <h3><%= f.label :contraseña %></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :contraseña %></h3>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
+      <em style="color:white;">(<%= @minimum_password_length %> caracteres mínimo)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
 
     <div class="field">
-      <h3><%= f.label :confirme_la_contraseña %><br /></h3>
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= f.label :confirme_la_contraseña %><br /></h3>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
-    <div class="actions" style="margin-top: 5px; margin-bottom: 30px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+    <div class="actions" style="margin-top: 30px; margin-bottom: 30px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
       <%= f.submit "Registrarse" %>
     </div>
 
   <% end %>
+
 </div>
     
+
+<% if notice %>
+  <div class="alert alert-success" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= alert %>
+  </div>
+<% end %>
