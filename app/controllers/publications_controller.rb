@@ -16,6 +16,7 @@ class PublicationsController < ApplicationController
   def create
     @publication_params = params.require(:publication).permit(:title, :image, :species, :typo,
                                                               :price, :direction)
+    @publication_params[:user_id] =  current_user.id
     @publication = Publication.create(@publication_params)
     if @publication.save
       redirect_to publications_index_path, notice: 'Publicación creada correctamente'
