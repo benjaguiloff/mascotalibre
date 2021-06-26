@@ -1,8 +1,23 @@
-<p><%= notice %></p>
+<% if current_user.id == @user.id %>
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#">Yo</a></li>
+        <li role="presentation"><a href="/users/<%= @user.id %>/posted">Mis publicaciones</a></li>
+        <li role="presentation"><a href="/users/<%= @user.id %>/purchased">Mis compras</a></li>
+        <li role="presentation"><a href="/users/<%= @user.id %>/saved">Publicaciones guardadas</a></li>
+    </ul>
+<% end %>
 
-<h3><%= @user.name %></h3>
-<%= image_tag(@user.image, style: "width:15%") %>
-<div>Email: 
-<%= @user.email %></div>
-<div>Telefono: 
-<%= @user.phone %></div>
+
+<div class="container" style="width:50%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; margin-top:50px; padding:10px; align-content: center">
+    
+    <%= image_tag(@user.image, style: "width:200px; border-radius:100%; float: left; margin-right:20px;") %>
+    <h1 style="color: #1F2833"><strong><%= @user.name %><strong></h1>
+    <h3 style="color: #1F2833"><strong>Email:</strong> <%= @user.email %></h3>
+    <h3 style="color: #1F2833"><strong>Telefono:</strong> <%= @user.phone %></h3>
+    <% if current_user.id == @user.id %>
+        <a href="/users/edit" class="btn btn-primary" role="button" style="float: right;">Editar</a>
+    <% end %>
+
+</div>
+
+<h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>

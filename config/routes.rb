@@ -49,7 +49,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions', registrations: 'users/registrations'
   }
   match '/users', to: 'users#index', via: 'get'
-  match '/users/:id', to: 'users#show', via: 'get', as: 'users_show'
+  match '/users/:id/info', to: 'users#show', via: 'get', as: 'users_show'
+  match '/users/:id/posted', to: 'users#show_posted', via: 'get', as: 'users_show_posts'
+  match '/users/:id/purchased', to: 'users#show_purchased', via: 'get', as: 'users_show_purchases'
+  match '/users/:id/saved', to: 'users#show_saved', via: 'get', as: 'users_show_saved'
   get 'welcome/index'
 
   ##################### Publicaciones ##################

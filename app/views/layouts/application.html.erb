@@ -43,9 +43,8 @@
                       <%# <li><a style="color: white;" href="/users/sign_in">Iniciar Sesión</a></li> %>
                       <li><%= link_to "Chat", conversations_path %></li>
                       <li><%= link_to "Reseñas", reviews_index_path %></li>
-                      <li><%= link_to "Publicaciones", publications_index_path, method: :get %></li>
-                      <li><%= link_to "Profiles", users_path, method: :get %></li>
-                      <li><%= link_to "Edit", edit_user_registration_path, method: :get %></li>
+                      <li><%= link_to 'Mi perfil', users_show_path(user.id), method: :get %></li>
+                      <li><%= link_to 'Publicar', publications_new_path%></li>
                       <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
                     </ul>
                   </div><!-- /.navbar-collapse -->
@@ -65,7 +64,19 @@
         </div><!-- /.container-fluid -->
 
       </nav>
+      <% if notice %>
+        <div class="alert alert-success" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+            <p class="notice"><%= notice %></p>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+            <%= alert %>
+        </div>
+      <% end %>
       <%= yield %>
+
     </header>
     
     <!-- <p class="alert"><%= alert %></p> -->
