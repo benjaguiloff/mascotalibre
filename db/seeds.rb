@@ -8,3 +8,6 @@
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 Fake.create(accepted: "false")
 Fake.create(accepted: "true")
+
+Fake2.create(typo: "Venta")
+Fake2.create(typo: "Adopción")
