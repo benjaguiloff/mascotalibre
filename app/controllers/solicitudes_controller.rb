@@ -45,6 +45,24 @@ class SolicitudesController < ApplicationController
     end
   end
 
+  def accepted
+    @solicitude = Solicitude.find(params[:id])
+    @conversations = Conversation.all
+    @buyer = User.find(@solicitude.user_id)
+    @publication = Publication.find(@solicitude.publication_id)
+    if @solicitude.update({:accepted => true})
+      @publication.update({:buyer => @buyer.id})
+      @conversations.each do |conversation|
+       if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id
+         if conversation.sender_id == @buyer.id || conversation.recipient_id == @buyer.id
+           conversation.update({:exist => true})
+           redirect_to conversation_messages_path(conversation), notice: "Solicitud aceptada corectamente"
+         end
+       end
+      end
+    end
+  end
+
   def delete
     @solicitude = Solicitude.find(params[:id])
     @solicitude.destroy

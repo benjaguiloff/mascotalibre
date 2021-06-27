@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_224750) do
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
+    t.boolean "exist", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -124,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_224750) do
     t.bigint "user_id"
     t.bigint "publication_id"
     t.text "content"
-    t.boolean "accepted"
+    t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publication_id"], name: "index_solicitudes_on_publication_id"

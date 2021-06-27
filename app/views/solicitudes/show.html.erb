@@ -1,3 +1,4 @@
+
 <% @users.each do |user| %>
     <% if user.id == @solicitude.id_user %>
         <% @publications.each do |publication| %>
@@ -9,6 +10,7 @@
         <% end %>
     <% end %>
 <% end %>
+
 <p><strong>Comentario: </strong><%= @solicitude.content %></p>
 
 

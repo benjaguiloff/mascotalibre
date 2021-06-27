@@ -21,7 +21,9 @@
        <% else %>
          <% recipient = User.find(conversation.sender_id) %>
        <% end %>
-       <h3><%= link_to recipient.email, conversation_messages_path(conversation)%></h3>
+       <% if conversation.exist == true %>
+        <h3><%= link_to recipient.name, conversation_messages_path(conversation)%></h3>
+       <% end %>
       <% end %>
      <% end %>
      </div>

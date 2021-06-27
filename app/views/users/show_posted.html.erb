@@ -17,6 +17,11 @@
                         <p><strong>Especie:</strong> <%= publication.species %></p>
                         <p><strong>Precio:</strong> <%= publication.price %></p>
                         <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                        <% if publication.buyer == -1 %>
+                            <h5 style="color:red">Estado: Disponible</h5>
+                        <% else %>
+                            <h5 style="color:red">Estado: Vendido</h5>
+                        <% end %>
                     </div>
                 </div>
             </div>

@@ -16,9 +16,11 @@ class UsersController < ApplicationController
 
   def show_purchased
     @user = User.find_by(id: params[:id])
+    @publications = Publication.all
   end
 
   def show_saved
     @user = User.find_by(id: params[:id])
+    @publications = Publication.all
   end
 end

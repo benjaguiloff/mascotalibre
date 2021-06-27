@@ -31,18 +31,28 @@
     <strong> Dirección de entrega: </strong>
     <%= @publication.direction %>
 </p>
-<% if current_user.id == @publication.user_id %>
-<% Solicitude.all.each do |s| %>
-    <% if s.publication_id == @publication.id %>
-        <%= s.content %>
-        <%= link_to "Aceptar", solicitudes_edit_path(s.id) %>
+<% if @publication.buyer == -1 %>
+    <% if current_user %>
+        <% if current_user.id == @publication.user_id %>
+            <% Solicitude.all.each do |s| %>
+                <% if s.publication_id == @publication.id %>
+                    <%= s.content %>
+                    <%= link_to "Aceptar", solicitudes_accepted_path(s.id) %>
+                <% end %>
+            <% end %>
+            <p> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
+            <p> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>
+        <% end %>
+
+        <% if current_user.id != @publication.user_id %>
+            <p> <%= link_to 'Hacer un comentario', comments_new_path %></p>
+            <p> <%= link_to 'Enviar solicitud de compra', solicitudes_new_path(:publication_id => @publication.id) %></p>
+        <% end %>
+        <p> <%= link_to 'Volver', publications_index_path %></p>
+
+    <% else %>
+        <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
+        <button><%= link_to "Iniciar Sesión", new_user_session_path, method: :get %></button>
+
     <% end %>
 <% end %>
-<% end %>
-<% if current_user.id != @publication.user_id %>
-<p> <%= link_to 'Hacer un comentario', comments_new_path %></p>
-<p> <%= link_to 'Enviar solicitud de compra', solicitudes_new_path(:publication_id => @publication.id) %></p>
-<% end %>
-<p> <%= link_to 'Volver', publications_index_path %></p>
-<p> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
-<p> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>
