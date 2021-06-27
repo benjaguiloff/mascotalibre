@@ -31,9 +31,18 @@
     <strong> Dirección de entrega: </strong>
     <%= @publication.direction %>
 </p>
-
+<% if current_user.id == @publication.user_id %>
+<% Solicitude.all.each do |s| %>
+    <% if s.publication_id == @publication.id %>
+        <%= s.content %>
+        <%= link_to "Aceptar", solicitudes_edit_path(s.id) %>
+    <% end %>
+<% end %>
+<% end %>
+<% if current_user.id != @publication.user_id %>
 <p> <%= link_to 'Hacer un comentario', comments_new_path %></p>
-<p> <%= link_to 'Enviar solicitud de compra', solicitudes_new_path %></p>
+<p> <%= link_to 'Enviar solicitud de compra', solicitudes_new_path(:publication_id => @publication.id) %></p>
+<% end %>
 <p> <%= link_to 'Volver', publications_index_path %></p>
 <p> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
 <p> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>

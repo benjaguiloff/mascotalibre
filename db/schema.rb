@@ -118,8 +118,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
     t.bigint "user_id"
     t.bigint "publication_id"
     t.text "content"
-    t.integer "id_user"
-    t.integer "id_publication"
     t.boolean "accepted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

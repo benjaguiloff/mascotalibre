@@ -15,14 +15,16 @@ class SolicitudesController < ApplicationController
 
   def new
     @solicitude = Solicitude.new
+    @solicitude.publication_id = params[:publication_id]
   end
 
   def create
-    @solicitude_params = params.require(:solicitude).permit(:content, :id_user, :id_publication,
+    @solicitude_params = params.require(:solicitude).permit(:content, :publication_id,
                                                             accepted: false)
+    @solicitude_params[:user_id] =  current_user.id                                                       
     @solicitude = Solicitude.create(@solicitude_params)
     if @solicitude.save
-      redirect_to solicitudes_index_path, notice: 'Solicitud enviada'
+      redirect_to welcome_index_path, notice: 'Solicitud enviada'
     else
       redirect_to solicitudes_new_path, notice: 'Error al crear solicitud'
     end
