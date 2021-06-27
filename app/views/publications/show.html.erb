@@ -1,36 +1,26 @@
-<p> <%= notice %></p>
 
-<h1>Viendo una publicación</h1>
+<div style="text-align:center">
+    <h1 style="color: white;"><strong><%= @publication.title %></strong></h1>
+    <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
+</div><br>
 
-<p>
-    <strong> Título: </strong>
-    <%= @publication.title %>
-</p>
+<%= image_tag(@publication.image, style: "border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:4%; width:550px; margin-left: auto; margin-right: auto; display: block;") %>
 
-<p>
-    <strong> Imagen: </strong>
-    <%= image_tag(@publication.image, style: "width:15%") %>
-</p>
+<div class="container"  style="width:85%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; margin-top:50px; padding:10px; align-content: center">
 
-<p>
-    <strong> Especie: </strong>
-    <%= @publication.species %>
-</p>
+    <h2 style="color: #1F2833"><strong>Tipo de publicación: </strong><%= @publication.typo %></h2>
+    <h2 style="color: #1F2833"><strong>Especie</strong> <%= @publication.species %></h2>
+    <h2 style="color: #1F2833"><strong>Precio:</strong> <%= @publication.price %></h2><br>
+    <h5 style="color: #1F2833"><strong>Dirección de entrega</strong> <%= @publication.direction %></h3>
+    <% if current_user %>
+        <% if current_user.id == @publication.user_id %>
+            <p style="float: right;"> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
+            <p style="float: right; color:white;">____</p>
+            <p style="float: right;"> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>
+        <% end %>
+    <% end %>
 
-<p>
-    <strong> Tipo: </strong>
-    <%= @publication.typo %>
-</p>
-
-<p>
-    <strong> Precio: </strong>
-    <%= @publication.price %>
-</p>
-
-<p>
-    <strong> Dirección de entrega: </strong>
-    <%= @publication.direction %>
-</p>
+</div>
 <% if @publication.buyer == -1 %>
     <% if current_user %>
         <% if current_user.id == @publication.user_id %>
@@ -40,19 +30,21 @@
                     <%= link_to "Aceptar", solicitudes_accepted_path(s.id) %>
                 <% end %>
             <% end %>
-            <p> <%= link_to 'Editar', publications_edit_path(@publication.id) %></p>
-            <p> <%= link_to 'Eliminar', publications_delete_path(@publication.id), method: :delete %></p>
         <% end %>
 
         <% if current_user.id != @publication.user_id %>
-            <p> <%= link_to 'Hacer un comentario', comments_new_path %></p>
-            <p> <%= link_to 'Enviar solicitud de compra', solicitudes_new_path(:publication_id => @publication.id) %></p>
+            <div style="text-align:center; margin-top:20px; margin-bottom:20px">
+                <a href="/comments/new" class="btn btn-primary" role="button">Escribe un comentario</a>
+                <a href="/solicitudes/new?publication_id=<%= @publication.id %>" class="btn btn-primary" role="button">Enviar solicitud</a>
+                <a href="/" class="btn btn-primary" role="button">Volver</a>
+            </div>
         <% end %>
-        <p> <%= link_to 'Volver', publications_index_path %></p>
 
     <% else %>
-        <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
-        <button><%= link_to "Iniciar Sesión", new_user_session_path, method: :get %></button>
+        <div style="text-align:center; margin-top:20px; margin-bottom:20px">
+            <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
+             <a href="/users/sign_in" class="btn btn-primary" role="button">Iniciar sesión</a>
+        </div>
 
     <% end %>
 <% end %>
