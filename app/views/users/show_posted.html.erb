@@ -16,7 +16,14 @@
                         <h4 style="margin-bottom:15px; margin-top:1px"><%= publication.typo %></h4>
                         <p><strong>Especie:</strong> <%= publication.species %></p>
                         <p><strong>Precio:</strong> <%= publication.price %></p>
-                        <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                        <div style="position: absolute;  display: flex;">
+                            <p style=" position: relative;"><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                            <% if publication.buyer == -1 %>
+                                <h5 style="position: relative; color:green; margin-left:25px;"><strong>Estado:</strong> Disponible</h5>
+                            <% else %>
+                                <h5 style="position: relative; color:red; margin-left:25px;"><strong>Estado:</strong> Vendido</h5>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
             </div>

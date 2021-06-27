@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # UPDATE
   get 'solicitudes/:id/edit', to: 'solicitudes#edit', as: 'solicitudes_edit'
   patch 'solicitudes/:id', to: 'solicitudes#update', as: 'solicitudes_update'
+  get 'solicitudes/:id/accepted', to: 'solicitudes#accepted', as: 'solicitudes_accepted'
 
   # DELETE
   delete 'solicitudes/:id', to: 'solicitudes#delete', as: 'solicitudes_delete'

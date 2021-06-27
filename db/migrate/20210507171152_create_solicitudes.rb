@@ -4,9 +4,7 @@ class CreateSolicitudes < ActiveRecord::Migration[5.2]
       t.belongs_to :user, index: true
       t.belongs_to :publication, index: true
       t.text :content
-      t.integer :id_user
-      t.integer :id_publication
-      t.boolean :accepted
+      t.boolean :accepted, default: false
 
       t.timestamps
     end

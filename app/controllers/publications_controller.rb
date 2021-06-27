@@ -7,6 +7,7 @@ class PublicationsController < ApplicationController
 
   def show
     @publication = Publication.find(params[:id])
+    @user = User.find(@publication.user_id)
   end
 
   def new
@@ -58,6 +59,6 @@ class PublicationsController < ApplicationController
   def delete
     @publication = Publication.find(params[:id])
     @publication.destroy
-    redirect_to publications_index_path, notice: 'La publicación ha sido eliminada'
+    redirect_to "/", notice: 'La publicación ha sido eliminada'
   end
 end
