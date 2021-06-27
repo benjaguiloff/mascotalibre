@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Proyecto</title>
+    <title>MascotaLibre | ¡Encuentra tu mascota!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,35 +16,59 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 
-  <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-    <% @users = User.all %>
-    <% if current_user %>
-      <% @users.each do |user| %>
-        <% if user.id == current_user.id %>
-        <div class="item"><h3>
-          <%= user.name %>
-          </h3></div>
-        <% end %>
-      <% end %>   
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <body style="background-color:#1F2833;">
+  
+  <!-- NavBar obtenida de https://bootstrapdocs.com/v3.3.6/docs/components/#navbar-default -->
+    <header>
 
-      <%= link_to "Edit", edit_user_registration_path, method: :get %>
+      <nav class="navbar navbar-default" style="background-color:green; border-color: #D1E8E2;">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              <img alt="MascotaLibre" src="https://i.ibb.co/Xy9HMgm/pawazul.png" width="65" height="22">
+            </a>
+            <a style="color: #1F2833;" class="navbar-brand" href="/">
+              <strong>MascotaLibre</strong>
+            </a>
+          </div>
 
-      <%= link_to "Profiles", users_path, method: :get %>
+          <% @users = User.all %>
+          <% if current_user %>
+            <% @users.each do |user| %>
+              <% if user.id == current_user.id %>
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                      <%# <li><a style="color: white;" href="/users/sign_in">Iniciar Sesión</a></li> %>
+                      <li><%= link_to "Chat", conversations_path %></li>
+                      <li><%= link_to "Reseñas", reviews_index_path %></li>
+                      <li><%= link_to "Publicaciones", publications_index_path, method: :get %></li>
+                      <li><%= link_to "Profiles", users_path, method: :get %></li>
+                      <li><%= link_to "Edit", edit_user_registration_path, method: :get %></li>
+                      <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                    </ul>
+                  </div><!-- /.navbar-collapse -->
+              <% end %>
+            <% end %>   
+          <% else %>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                    <%# <li><a style="color: white;" href="/users/sign_in">Iniciar Sesión</a></li> %>
+                    <li style="color: #1F2833;"><%= link_to "Iniciar Sesión", new_user_session_path, method: :get %></li>
+                    <li><%= link_to "Regístrate", new_user_registration_path, method: :get %></li>
+                    <li><%= link_to 'Admin', admin_user_session_path %></li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+          <% end %>
+        </div><!-- /.container-fluid -->
 
-      <%= link_to "Publicaciones", publications_index_path, method: :get %>
-      
-      <%= link_to "Reseñas", reviews_index_path %>
+      </nav>
+      <%= yield %>
+    </header>
+    
+    <!-- <p class="alert"><%= alert %></p> -->
 
-      <%= link_to "Chat", conversations_path %>
-      
-    <% else %>
-      <%= link_to "Sign in", new_user_session_path, method: :get %>
-      <%= link_to "Sign up", new_user_registration_path, method: :get %>
-
-    <% end %>
-    <%= yield %>
   </body>
 </html>

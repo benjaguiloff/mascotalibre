@@ -1,1 +1,51 @@
-<h1>MascotaLibre</h1>
+<% if notice %>
+    <div class="alert alert-success" role="alert" style="margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+        <p class="notice"><%= notice %></p>
+    </div>
+<% end %>
+
+<% if alert %>
+    <div class="alert alert-danger" role="alert" style="margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+        <p class="alert"><%= alert %></p>
+    </div>
+<% end %>
+
+<% if current_user %>
+    <div style="width:95%; margin-left: auto; margin-right: auto; margin-top:25px; margin-bottom:55px; text-align: left;">
+        <h1 style="color: white; margin-bottom:1px;"><strong>¡Hola <%= current_user.name %>!</strong></h1>
+        <h2 style="color: white; margin-bottom:30px;">Aquí están las últimas publicaciones:</h2>
+    </div>
+<% else %>
+    <div style="width:95%; margin-left: auto; margin-right: auto; margin-top:25px; margin-bottom:55px; text-align: center;">
+        <h1 style="color: white; margin-bottom:30px;"><strong>¡Bienvenid@ a Mascota Libre!</strong></h1>
+        <img alt="MascotaLibre" src="https://i.ibb.co/C1M8Mky/pawblanco.png" width="946" height="294">
+        <h3 style="margin-left: auto; margin-right: auto; text-align: center; width:65%; color: white; margin-top:30px;"> 
+            Aquí podrás encontrar a tu próxima máscota, ya sea que estés buscando un perro, gato, pez o incluso un hurón, ¡aquí lo tenemos! <br>
+            Si lo que buscas es vender o poner en adopción una mascota, también estás en el lugar correcto. <br> <br>
+            <strong>¡Crea tu cuenta hoy y comienza la busqueda de tu próxima mascota!</strong>
+        </h3>
+    </div>
+<% end %>
+
+
+<!-- Formato de posts obtenido de https://bootstrapdocs.com/v3.3.6/docs/components/#thumbnails -->
+
+<div class="row" style="width:95%; margin-left: auto; margin-right: auto;">
+    <% @publications.each do |publication| %>
+        <% if publication.accepted != "false" %>
+            <div class="col-sm-6 col-md-4" style="width:33%;">
+                <div class="thumbnail" style="border-style:solid; border-width:7px; border-color: black; height:450px;">
+                    <%= image_tag(publication.image, style: " height:220px; width:95%; margin-top:10px; border-style:solid; border-width:medium; border-color: #323233;") %>
+                    <div class="caption">
+                        <h3 style="margin-bottom:1px; margin-top:1px"><strong><%= publication.title %></strong></h3>
+                        <h4 style="margin-bottom:15px; margin-top:1px"><%= publication.typo %></h4>
+                        <p><strong>Especie:</strong> <%= publication.species %></p>
+                        <p><strong>Precio:</strong> <%= publication.price %></p>
+                        <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                    </div>
+                </div>
+            </div>
+        <% end%>
+    <% end%>
+</div>
+
