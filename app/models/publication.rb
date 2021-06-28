@@ -3,5 +3,5 @@
 class Publication < ApplicationRecord
   has_one_attached :image
   has_many :solicitudes
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 end

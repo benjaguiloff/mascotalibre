@@ -20,7 +20,7 @@ class PublicationsController < ApplicationController
     @publication_params[:user_id] =  current_user.id
     @publication = Publication.create(@publication_params)
     if @publication.save
-      redirect_to publications_index_path, notice: 'Publicación creada correctamente'
+      redirect_to "/", notice: 'Publicación creada correctamente'
     else
       redirect_to publications_new_path, notice: 'Error al crear la publicación'
     end
