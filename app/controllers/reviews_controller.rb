@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     @review = Review.create(@review_params)
 
     if @review.save
-      redirect_to "/", notice: 'Reseña creada correctamente'
+      redirect_to "/users/#{@review_params[:id_reviewed]}/info", notice: 'Reseña creada correctamente'
     else
       redirect_to "/", notice: 'Error al crear reseña'
     end
@@ -47,6 +47,6 @@ class ReviewsController < ApplicationController
   def delete
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_index_path, notice: 'Reseña eliminada'
+    redirect_to welcome_index_path, notice: 'Reseña eliminada'
   end
 end

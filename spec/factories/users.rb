@@ -7,4 +7,5 @@ FactoryBot.define do
     phone {"123123"}
     
   end
+
 end

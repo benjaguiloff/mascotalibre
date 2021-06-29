@@ -1,10 +1,9 @@
 FactoryBot.define do
-    factory :comment do
+    factory :solicitude do
       id {1}
-      contents {"sabe"} 
+      content {"sabe"} 
       association :publication 
+      association :user
     end
   end
-  
-
   

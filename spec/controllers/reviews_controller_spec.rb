@@ -15,16 +15,14 @@ RSpec.describe ReviewsController, type: :controller do
     end
 
     describe "review #create" do
-        let!(:params) { 
-            {content: "sabe"}
-        }
+        let!(:params) {{content: "sabe", id_reviewed: 1, id_user: 2}}
         it "create a new review" do
             post :create, params: { review: params }
             expect(flash[:notice]).to eq('Reseña creada correctamente')
         end
         it "create a new review" do
             post :create, params: { review: params }
-            expect(response).to redirect_to(action: :index)
+            expect(response).to redirect_to("/users/#{params[:id_reviewed]}/info")
         end
     end
 
