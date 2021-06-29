@@ -29,8 +29,8 @@
     <% end %>
 
 </div>
-<% if @publication.buyer == -1 %>
-    <% if current_user %>
+<% if current_user %>
+    <% if @publication.buyer == -1 %>
         <% if current_user.id == @publication.user_id %>
             <% Solicitude.all.each do |s| %>
                 <% if s.publication_id == @publication.id %>
@@ -49,12 +49,18 @@
         <% end %>
 
     <% else %>
-        <div style="text-align:center; margin-top:20px; margin-bottom:20px">
-            <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
-            <a href="/users/sign_in" class="btn btn-primary" role="button">Iniciar sesión</a>
-            <a href="/users/sign_up" class="btn btn-primary" role="button">Regístrate</a><br><br>
-            <a href="/" class="btn btn-primary" role="button">Volver</a>
-        </div>
+        <% if current_user.id == @publication.buyer %>
+            <div style="text-align:center; margin-top:20px; margin-bottom:20px">
+                <a href="/reviews/new/<%= current_user.id %>/<%= @publication.user_id %>" class="btn btn-primary" role="button">Haz una reseña del vendedor</a>
+            </div>
+        <% end %>
 
     <% end %>
+<% else %>
+    <div style="text-align:center; margin-top:20px; margin-bottom:20px">
+        <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
+        <a href="/users/sign_in" class="btn btn-primary" role="button">Iniciar sesión</a>
+        <a href="/users/sign_up" class="btn btn-primary" role="button">Regístrate</a><br><br>
+        <a href="/" class="btn btn-primary" role="button">Volver</a>
+    </div>
 <% end %>

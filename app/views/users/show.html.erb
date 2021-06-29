@@ -25,3 +25,11 @@
 </div>
 
 <h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>
+
+<% @reviews.each do |review| %>
+    <% if review.id_reviewed == @user.id %>
+    <div style="align-content: center">
+        <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>"</h3>
+    </div>
+    <% end %>
+<% end %>
