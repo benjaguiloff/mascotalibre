@@ -1,7 +1,15 @@
 
 <div style="text-align:center">
     <h1 style="color: white;"><strong><%= @publication.title %></strong></h1>
-    <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
+    <% if current_user %>
+        <% if current_user.id == @publication.user_id %>
+            <h5 style="color:white">Vendedor: <%= link_to "Tu", users_show_path(@user.id) %></h5>
+        <% else %>
+            <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
+        <% end %>
+    <% else %>
+         <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
+    <% end %>
 </div><br>
 
 <%= image_tag(@publication.image, style: "border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:4%; width:550px; margin-left: auto; margin-right: auto; display: block;") %>
@@ -26,7 +34,7 @@
         <% if current_user.id == @publication.user_id %>
             <% Solicitude.all.each do |s| %>
                 <% if s.publication_id == @publication.id %>
-                    <%= s.content %>
+                    <h2 style="color:white;"><%= s.content %></h2>
                     <%= link_to "Aceptar", solicitudes_accepted_path(s.id) %>
                 <% end %>
             <% end %>
@@ -43,7 +51,9 @@
     <% else %>
         <div style="text-align:center; margin-top:20px; margin-bottom:20px">
             <h4 style="color:white">Debes iniciar sesión para poder solicitar esta mascota</h4>
-             <a href="/users/sign_in" class="btn btn-primary" role="button">Iniciar sesión</a>
+            <a href="/users/sign_in" class="btn btn-primary" role="button">Iniciar sesión</a>
+            <a href="/users/sign_up" class="btn btn-primary" role="button">Regístrate</a><br><br>
+            <a href="/" class="btn btn-primary" role="button">Volver</a>
         </div>
 
     <% end %>

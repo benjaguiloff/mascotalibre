@@ -55,8 +55,9 @@ class SolicitudesController < ApplicationController
       @conversations.each do |conversation|
        if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id
          if conversation.sender_id == @buyer.id || conversation.recipient_id == @buyer.id
+           @conversa = conversation
            conversation.update({:exist => true})
-           redirect_to conversation_messages_path(conversation), notice: "Solicitud aceptada corectamente"
+          #  redirect_to conversation_messages_path(conversation), notice: "Solicitud aceptada corectamente"
          end
        end
       end
