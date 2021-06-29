@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review_params = params.require(:review).permit(:content, :id_user, :id_reviewed)
+    @review_params = params.require(:review).permit(:content, :id_user, :id_reviewed, :rating)
     @review = Review.create(@review_params)
     if @review.save
       redirect_to reviews_index_path, notice: 'Reseña creada correctamente'
