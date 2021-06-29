@@ -32,9 +32,7 @@ class ReviewsController < ApplicationController
     @reviews_params = params.require(:review).permit(:content)
     @review = Review.find(params[:id])
     id_user = params[:id_user]
-    p "ACAAAAAAAAAAAAAAAAAAAAAAAA #{id_user}"
     id_reviewed = params[:id_reviewed]
-    p "ACAAAAAAAAAAA  #{id_reviewed}"
     @reviews_params[:id_user] = id_user.to_i
     @reviews_params[:id_reviewed] = id_reviewed.to_i
     if @review.update(@reviews_params)

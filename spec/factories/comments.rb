@@ -5,6 +5,5 @@ FactoryBot.define do
       association :publication 
     end
   end
-  
 
   
