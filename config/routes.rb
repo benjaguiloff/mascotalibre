@@ -22,11 +22,10 @@ Rails.application.routes.draw do
 
   ##################### Reseñas ##################
   # CREATE
-  get 'reviews/new', to: 'reviews#new', as: 'reviews_new'
+  get 'reviews/new/:id_user/:id_reviewed', to: 'reviews#new', as: 'reviews_new'
   post 'reviews', to: 'reviews#create'
 
   # READ
-  get 'reviews/index', to: 'reviews#index', as: 'reviews_index'
   get 'reviews/:id', to: 'reviews#show', as: 'reviews_show'
 
   # UPDATE

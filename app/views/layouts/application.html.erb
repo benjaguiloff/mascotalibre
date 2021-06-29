@@ -42,7 +42,6 @@
                     <ul class="nav navbar-nav navbar-right">
                       <%# <li><a style="color: white;" href="/users/sign_in">Iniciar Sesión</a></li> %>
                       <li><%= link_to "Chat", conversations_path %></li>
-                      <li><%= link_to "Reseñas", reviews_index_path %></li>
                       <li><%= link_to 'Mi perfil', users_show_path(user.id), method: :get %></li>
                       <li><%= link_to 'Publicar', publications_new_path%></li>
                       <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
