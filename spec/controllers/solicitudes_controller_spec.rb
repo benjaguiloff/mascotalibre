@@ -2,13 +2,31 @@ require 'rails_helper'
 
 RSpec.describe SolicitudesController, type: :controller do
   
-    describe "solicitude #delete" do
-        let!(:params) {{content: "sa", user_id: 1, publication_id: 2}}
+    describe "GET show" do
+        let(:solicitude) { create(:solicitude) }
+        it "assigns the requested order as @order" do
+          get :show, params: { id: solicitude.id }
+          expect(response).to have_http_status(200)
+        end
+    end
+
+    describe "review #update" do
+        let!(:solicitude) { create(:solicitude) }
+        it "should update" do
+            params = { content: "update" }
+            put :update, params: { id: solicitude.id, solicitude: params }
+            solicitude.reload 
+            expect(solicitude.content).to eq(params[:content])
+        end 
+    end
+
+    describe "review #delete" do
+        let!(:solicitude) { create(:solicitude) } 
         it "delete a solicitude" do
-            post :create, params: { solicitude: params } 
             delete :delete, params: { id: solicitude.id }
             expect(flash[:notice]).to eq('Solicitud eliminada')
-        end   
+        end
+        
     end
 end
 
