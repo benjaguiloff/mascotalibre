@@ -8,6 +8,7 @@ RSpec.describe 'Solicitudes', type: :request do
       get '/solicitudes/new'
       expect(response).to have_http_status(:success)
     end
+ 
 
     it 'renders new template' do
       get '/solicitudes/new'
@@ -27,3 +28,4 @@ RSpec.describe 'Solicitudes', type: :request do
     end
   end
 end
+
