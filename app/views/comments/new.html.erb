@@ -3,6 +3,8 @@
 <h1>Nuevo comentario</h1>
 
 <%= form_with(model: @comment, method: :post) do |form| %>
+
+<%= form.hidden_field :publication_id, :publication_id => @comment.publication_id %>
     <div class="field">
         <%= form.label :Comentario %>
         <%= form.text_field :contents %>

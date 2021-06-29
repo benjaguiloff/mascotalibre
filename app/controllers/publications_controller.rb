@@ -6,6 +6,8 @@ class PublicationsController < ApplicationController
   end
 
   def show
+    @comments = Comment.all
+    @users = User.all
     @publication = Publication.find(params[:id])
     @user = User.find(@publication.user_id)
   end
