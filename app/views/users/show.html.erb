@@ -24,12 +24,26 @@
 
 </div>
 
-<h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>
-
+<% puntaje = 0 %>
+<% cantidad = 0 %>
 <% @reviews.each do |review| %>
     <% if review.id_reviewed == @user.id %>
-    <div style="align-content: center">
-        <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>" <%= review.rating %>/5</h3>
-    </div>
+        <% puntaje = puntaje + review.rating %>
+        <% cantidad = cantidad + 1 %>
     <% end %>
 <% end %>
+<% if cantidad != 0 %>
+    <% puntaje_final = "%.2f" % (puntaje.to_f/cantidad.to_f) %>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><%= puntaje_final %>/5</h3>
+    <h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>
+    <% @reviews.each do |review| %>
+        <% if review.id_reviewed == @user.id %>
+        <div style="align-content: center">
+            <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>" <%= review.rating %>/5</h3>
+        </div>
+        <% end %>
+    <% end %>
+<% else %>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">No hay reseñas de este usuario</h3>
+<% end %>
+
