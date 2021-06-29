@@ -22,18 +22,20 @@
     <% @publications.each do |publication| %>
         <% if publication.accepted != "false" %>
             <% if publication.buyer == -1 %>
-                <div class="col-sm-6 col-md-4" style="width:33%;">
-                    <div class="thumbnail" style="border-style:solid; border-width:7px; border-color: black; height:450px;">
-                        <%= image_tag(publication.image, style: " height:220px; width:95%; margin-top:10px; border-style:solid; border-width:medium; border-color: #323233;") %>
-                        <div class="caption">
-                            <h3 style="margin-bottom:1px; margin-top:1px"><strong><%= publication.title %></strong></h3>
-                            <h4 style="margin-bottom:15px; margin-top:1px"><%= publication.typo %></h4>
-                            <p><strong>Especie:</strong> <%= publication.species %></p>
-                            <p><strong>Precio:</strong> <%= publication.price %></p>
-                            <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                <% if not User.where(id: publication.user_id).empty? %>
+                    <div class="col-sm-6 col-md-4" style="width:33%;">
+                        <div class="thumbnail" style="border-style:solid; border-width:7px; border-color: black; height:450px;">
+                            <%= image_tag(publication.image, style: " height:220px; width:95%; margin-top:10px; border-style:solid; border-width:medium; border-color: #323233;") %>
+                            <div class="caption">
+                                <h3 style="margin-bottom:1px; margin-top:1px"><strong><%= publication.title %></strong></h3>
+                                <h4 style="margin-bottom:15px; margin-top:1px"><%= publication.typo %></h4>
+                                <p><strong>Especie:</strong> <%= publication.species %></p>
+                                <p><strong>Precio:</strong> <%= publication.price %></p>
+                                <p><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <% end%>
             <% end%>
         <% end%>
     <% end%>
