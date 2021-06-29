@@ -14,19 +14,6 @@ RSpec.describe CommentsController, type: :controller do
           end
     end
 
-    describe "comment #create" do
-        let!(:params) { 
-            {contents: "sabe sabe"}
-        }
-        it "create a new post" do
-            post :create, params: { comment: params }
-            expect(flash[:notice]).to eq('Comentario creada correctamente')
-        end
-        it "create a new post" do
-            post :create, params: { comment: params }
-            expect(response).to redirect_to(action: :index)
-        end
-    end
 
     describe "comment #update" do
         let!(:comment) { create(:comment) }

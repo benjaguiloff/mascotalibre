@@ -45,6 +45,6 @@ class ReviewsController < ApplicationController
   def delete
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_index_path, notice: 'Reseña eliminada'
+    redirect_to welcome_index_path, notice: 'Reseña eliminada'
   end
 end
