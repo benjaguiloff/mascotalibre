@@ -2,10 +2,18 @@
 <div style="text-align:center">
     <h1 style="color: white;"><strong><%= @publication.title %></strong></h1>
     <% if current_user %>
+
+
         <% if current_user.id == @publication.user_id %>
             <h5 style="color:white">Vendedor: <%= link_to "Tu", users_show_path(@user.id) %></h5>
         <% else %>
             <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
+        <% end %>
+
+        <% if current_user.id == @publication.buyer %>
+            <div style="text-align:center; margin-top:20px; margin-bottom:10px">
+                <a href="/reviews/new/<%= current_user.id %>/<%= @publication.user_id %>" class="btn btn-primary" role="button">Haz una reseña del vendedor</a>
+            </div>
         <% end %>
     <% else %>
          <h5 style="color:white">Vendedor: <%= link_to @user.name, users_show_path(@user.id) %></h5>
@@ -14,7 +22,7 @@
 
 <%= image_tag(@publication.image, style: "border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:4%; width:550px; margin-left: auto; margin-right: auto; display: block;") %>
 
-<div class="container"  style="width:85%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; margin-top:50px; padding:10px; align-content: center">
+<div class="container"  style="width:85%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; margin-top:50px; margin-bottom:10px; padding:10px; align-content: center">
 
     <h2 style="color: #1F2833"><strong>Tipo de publicación: </strong><%= @publication.typo %></h2>
     <h2 style="color: #1F2833"><strong>Especie</strong> <%= @publication.species %></h2>
@@ -30,15 +38,8 @@
 
 </div>
 <% if current_user %>
+    
     <% if @publication.buyer == -1 %>
-        <% if current_user.id == @publication.user_id %>
-            <% Solicitude.all.each do |s| %>
-                <% if s.publication_id == @publication.id %>
-                    <h2 style="color:white;"><%= s.content %></h2>
-                    <%= link_to "Aceptar", solicitudes_accepted_path(s.id) %>
-                <% end %>
-            <% end %>
-        <% end %>
 
         <% if current_user.id != @publication.user_id %>
             <div style="text-align:center; margin-top:20px; margin-bottom:20px">
@@ -48,11 +49,29 @@
             </div>
         <% end %>
 
-    <% else %>
-        <% if current_user.id == @publication.buyer %>
-            <div style="text-align:center; margin-top:20px; margin-bottom:20px">
-                <a href="/reviews/new/<%= current_user.id %>/<%= @publication.user_id %>" class="btn btn-primary" role="button">Haz una reseña del vendedor</a>
-            </div>
+        <% if current_user.id == @publication.user_id %>
+            <h3 style="margin-left: auto; margin-right: auto; text-align: center; color: white; margin-bottom:5px;">_________________________________________________________</h3>
+            <h3 style="margin-left: auto; margin-right: auto; text-align: center; color: white"><strong>SOLICITUDES:</strong></h3>
+            <% cant_sol = 0 %>
+            <% Solicitude.all.each do |s| %>
+                <% if s.publication_id == @publication.id %>
+                    <% cant_sol = cant_sol + 1 %>
+                    <% @users.each do |user| %>
+                        <% if user.id == s.user_id %>
+
+                        <div class="container"  style="width:65%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: lightgreen; padding:10px; margin-bottom:15px">
+                            <h4>Solicitud de <strong><%= link_to user.name, users_show_path(user.id) %>:</strong></h4>
+                            <h2 style="margin-left: auto; margin-right: auto; text-align: center;"><i>"<%= s.content %>"</i></h2>
+                            <div style="float:right"><a href="/solicitudes/<%= s.id %>/accepted" class="btn btn-primary" role="button">Aceptar</a></div>
+                        </div>
+
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+            <% if cant_sol == 0 %>
+                <h5 style="margin-left: auto; margin-right: auto; text-align: center; color: white">No hay solicitudes</h5>
+            <% end %>
         <% end %>
 
     <% end %>
@@ -65,15 +84,30 @@
     </div>
 <% end %>
 
+<h3 style="margin-left: auto; margin-right: auto; text-align: center; color: white; margin-bottom:5px;">_________________________________________________________</h3>
+
+
+<h3 style="color: white; margin-left: auto; margin-right: auto; text-align: center;"><strong>COMENTARIOS:</strong></h3>
+<% cant_com = 0 %>
 <% @comments.each do |comment| %>
     <% if comment.publication_id == @publication.id %>
         <% @users.each do |user| %>
             <% if user.id == comment.user_id %>
+                <% cant_com = cant_com + 1 %>
                 <div class="container"  style="width:65%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; padding:10px; align-content: center">
-                    <h4><strong><%= link_to user.name, users_show_path(user.id) %>:</strong></h4>
-                    <h5><%= comment.contents %></h5>
+                    <h4>
+                        <span style="float:left">
+                            <strong><%= link_to user.name, users_show_path(user.id) %>:</strong> <i><%= comment.contents %></i>
+                        </span>
+                        <span style="float:right; font-size:8pt">
+                            <%= comment.updated_at %>
+                        </span>
+                    </h4>
                 </div>
             <% end %>
         <% end %>
     <% end %>
+<% end %>
+<% if cant_com == 0 %>
+    <h5 style="margin-left: auto; margin-right: auto; text-align: center; color: white">No hay comentarios</h5>
 <% end %>
