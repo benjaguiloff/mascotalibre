@@ -32,13 +32,14 @@
     <div class="panel-body">
      <h1 class="panel-heading">Usuarios:</h1>
        <% @users.each do |user| %>
-        <% if user.id != current_user.id %>
-         <div class="item"><h3>
-      <%= link_to user.name,
-       conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post"%>
-     </h3></div>
-      <% end %>
-     <% end %>
+        <% if current_user.contacts.include?("#{user.id}") %>
+         <div class="item">
+          <h3>
+            <%= link_to user.name, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post"%>
+          </h3>
+         </div>
+        <% end %>
+       <% end %>
     </div>
   </div>
 </div>

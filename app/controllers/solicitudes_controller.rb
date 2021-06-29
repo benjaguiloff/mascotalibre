@@ -49,6 +49,18 @@ class SolicitudesController < ApplicationController
     @solicitude = Solicitude.find(params[:id])
     @conversations = Conversation.all
     @buyer = User.find(@solicitude.user_id)
+
+    contacts_buyer = @buyer.contacts
+    p "ACÁ #{contacts_buyer} ---  es un array: #{contacts_buyer.instance_of?(Array)} es un string: #{contacts_buyer.instance_of?(String)}"
+    if contacts_buyer.include?("#{current_user.id}") == false
+      contacts_buyer.append(current_user.id)
+      @buyer.update({:contacts => contacts_buyer})
+
+      contacts_current = current_user.contacts
+      contacts_current.append(@buyer.id)
+      current_user.update({:contacts => contacts_current})
+    end
+
     @publication = Publication.find(@solicitude.publication_id)
     if @solicitude.update({:accepted => true})
       @publication.update({:buyer => @buyer.id})

@@ -29,7 +29,7 @@
 <% @reviews.each do |review| %>
     <% if review.id_reviewed == @user.id %>
     <div style="align-content: center">
-        <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>"</h3>
+        <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>" <%= review.rating %>/5</h3>
     </div>
     <% end %>
 <% end %>

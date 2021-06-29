@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_224750) do
     t.string "content"
     t.integer "id_user"
     t.integer "id_reviewed"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_224750) do
     t.string "name"
     t.string "image"
     t.string "phone"
+    t.string "contacts", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

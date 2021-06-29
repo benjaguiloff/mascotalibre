@@ -4,33 +4,27 @@
 
 <%= form_with(model: @publication, method: :patch, url: publications_update_admin_path) do |form| %>
     <div class="field">
-        <%= form.label :Título %>
-        <%= form.text_field :title %>
+        <%= form.hidden_field :title %>
     </div>
 
     <div class="field">
-        <%= form.label :Foto%>
         <%= form.file_field :image %>
     </div>
 
     <div class="field">
-        <%= form.label :Especie%>
-        <%= form.text_field :species %>
+        <%= form.hidden_field :species %>
     </div>
 
     <div class="field">
-        <%= form.label :Tipo%>
-        <%= form.text_field :type %>
+        <%= form.hidden_field :type %>
     </div>
 
     <div class="field">
-        <%= form.label :Precio%>
-        <%= form.text_field :price %>
+        <%= form.hidden_field :price %>
     </div>
 
     <div class="field">
-        <%= form.label :Dirección%>
-        <%= form.text_field :direction %>
+        <%= form.hidden_field :direction %>
     </div>
 
     <div class="field">
