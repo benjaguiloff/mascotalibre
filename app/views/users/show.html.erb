@@ -40,7 +40,8 @@
 <% end %>
 <% if cantidad != 0 %>
     <% puntaje_final = "%.2f" % (puntaje.to_f/cantidad.to_f) %>
-    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><%= puntaje_final %>/5</h3>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><strong>Rating del usuario</strong></h3>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><%= puntaje_final %>/5.00</h3>
     <h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>
     <% @reviews.each do |review| %>
         <% if review.id_reviewed == @user.id %>

@@ -49,7 +49,7 @@ class PublicationsController < ApplicationController
 
   def update_admin
     @publication = Publication.find(params[:id])
-    @publication_params = params.require(:publication).permit(:title, :image, :species, :typo,
+    @publication_params = params.require(:publication).permit(:title, :species, :typo,
                                                               :price, :direction, :accepted)
     if @publication.update(@publication_params)
       redirect_to admin_dashboard_path, notice: 'Publicación aceptada'

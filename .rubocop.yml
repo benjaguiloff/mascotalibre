@@ -49,3 +49,7 @@ Rails/FilePath:
 RSpec/MultipleDescribes:
   Exclude:
     - spec/requests/users_spec.rb
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/users/registrations_controller.rb
