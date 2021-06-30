@@ -1,25 +1,22 @@
-<h1>Nueva Solicitud</h1>
-<%= form_with(model: @solicitude, method: :post) do |form| %>
 
-    <div class="field">
-        <h4>¿Quién eres? </h4>
-        <%= form.collection_select :id_user, User.all, :id, :name %>
-    </div>
+<div class="container" style="width:65%; border-style:solid; border-width:15px; border-color: white; border-radius:5%; background-color: #1F2833;">
+  <div>
+    <h1 style="color:white;"><strong>Enviar solicitud</strong></h1>
+  </div>
+  <%= form_with(model: @solicitude, method: :post) do |form| %>
+    <%= form.hidden_field :publication_id, :publication_id => @solicitude.publication_id %>
 
-    <div class="field">
-        <h4>Elige la publicación que quieres solicitar:</h4>
-        <%= form.collection_select :id_publication, Publication.all, :id, :title %>
-    </div>
-
-    <div class="field">
-        <h4>Escribe un mensaje:</h4>
+      <div class="field" style="margin-top: 5px; margin-left: auto; margin-right: auto; text-align: center;">
+        <h3 style="color:white;">Escribe un mensaje:<br /></h3>
         <%= form.text_field :content %>
+      </div>
+
+    <div class="actions" style="margin-bottom: 10px; margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= form.submit "Enviar solicitud" %>
     </div>
 
-    <h4></h4>
-
-    <div class="action">
-        <%= form.submit "Enviar solicitud"%>
+    <div style="margin-bottom: 10px; margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= link_to 'Cancelar', "/" %>
     </div>
 
-<% end %>
+  <% end %>

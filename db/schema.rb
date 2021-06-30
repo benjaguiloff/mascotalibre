@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_210353) do
+ActiveRecord::Schema.define(version: 2021_06_26_224750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,13 +64,23 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
 
   create_table "comments", force: :cascade do |t|
     t.text "contents"
+    t.integer "user_id"
+    t.bigint "publication_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["publication_id"], name: "index_comments_on_publication_id"
   end
 
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
+    t.boolean "exist", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fake2s", force: :cascade do |t|
+    t.string "typo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
   end
 
   create_table "publications", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "title"
     t.string "image"
     t.string "species"
@@ -99,25 +110,30 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
     t.integer "price"
     t.text "direction"
     t.string "accepted", default: "false"
+    t.integer "buyer", default: -1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_publications_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "content"
+    t.string "content"
     t.integer "id_user"
     t.integer "id_reviewed"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "solicitudes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "publication_id"
     t.text "content"
-    t.integer "id_user"
-    t.integer "id_publication"
-    t.boolean "accepted"
+    t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["publication_id"], name: "index_solicitudes_on_publication_id"
+    t.index ["user_id"], name: "index_solicitudes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -126,6 +142,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_210353) do
     t.string "name"
     t.string "image"
     t.string "phone"
+    t.string "contacts", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

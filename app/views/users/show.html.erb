@@ -1,8 +1,56 @@
-<p><%= notice %></p>
+<% if current_user %>
+    <% if current_user.id == @user.id %>
+        <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%; margin-left: auto; margin-right: auto; text-align: center;">
+            <li role="presentation" class="active"><a href="#">Yo</a></li>
+            <li role="presentation"><a href="/users/<%= @user.id %>/posted">Mis publicaciones</a></li>
+            <li role="presentation"><a href="/users/<%= @user.id %>/purchased">Mis compras</a></li>
+        </ul>
+    <% else %>
+        <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%; margin-left: auto; margin-right: auto; text-align: center;">
+            <li role="presentation" class="active"><a href="#">Info</a></li>
+            <li role="presentation"><a href="/users/<%= @user.id %>/posted">Publicaciones</a></li>
+        </ul>
+    <% end %>
+<% end %>
 
-<h3><%= @user.name %></h3>
-<%= image_tag(@user.image, style: "width:15%") %>
-<div>Email: 
-<%= @user.email %></div>
-<div>Telefono: 
-<%= @user.phone %></div>
+
+<div class="container" style="width:65%; border-style:solid; border-width:medium; border-color: dodgerblue; border-radius:2%; background-color: white; margin-top:50px; padding:10px; align-content: center">
+    
+    <%= image_tag(@user.image, style: "height:190px; float: left; margin-right:20px;") %>
+    <h1 style="color: #1F2833;"><strong><%= @user.name %><strong></h1>
+    <h3 style="color: #1F2833;"><strong>Email:</strong> <%= @user.email %></h3>
+    <h3 style="color: #1F2833;"><strong>Teléfono:</strong> <%= @user.phone %></h3>
+    <% if current_user %>
+        <% if current_user.id == @user.id %>
+            <a href="/users/edit" class="btn btn-primary" role="button" style="float: right;">Editar</a>
+        <% end %>
+    <% end %>
+
+</div>
+
+<h3 style="margin-left: auto; margin-right: auto; text-align: center; color: white; margin-bottom:50px;">_________________________________________________________</h3>
+
+<% puntaje = 0 %>
+<% cantidad = 0 %>
+<% @reviews.each do |review| %>
+    <% if review.id_reviewed == @user.id && review.rating %>
+        <% puntaje = puntaje + review.rating %>
+        <% cantidad = cantidad + 1 %>
+    <% end %>
+<% end %>
+<% if cantidad != 0 %>
+    <% puntaje_final = "%.2f" % (puntaje.to_f/cantidad.to_f) %>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><strong>Rating del usuario</strong></h3>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;"><%= puntaje_final %>/5.00</h3>
+    <h2 style="color:white"><br><br><strong>Reseñas sobre este usuario:</strong></h2>
+    <% @reviews.each do |review| %>
+        <% if review.id_reviewed == @user.id %>
+        <div style="align-content: center">
+            <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">"<%= review.content %>" <%= review.rating %>/5</h3>
+        </div>
+        <% end %>
+    <% end %>
+<% else %>
+    <h3 style="color:white; margin-left: auto; margin-right: auto; text-align: center;">Aún no hay reseñas de este usuario</h3>
+<% end %>
+

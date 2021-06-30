@@ -12,7 +12,7 @@ module Users
 
     # POST /resource
     # def create
-    #   super
+    #   pass
     # end
 
     # GET /resource/edit
@@ -22,7 +22,7 @@ module Users
 
     # PUT /resource
     # def update
-    #   super
+    #   pass
     # end
 
     # DELETE /resource

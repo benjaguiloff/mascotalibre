@@ -11,12 +11,25 @@ AllCops:
     - 'config/**/*'
 
 Metrics/LineLength:
-  Max: 100
+  Max: 200
 
 Metrics/BlockLength:
+  Max: 100
   Exclude:
     - config/**/*
     - spec/**/*
+
+Metrics/AbcSize:
+  Max: 100
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/PerceivedComplexity:
+  Max: 10
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
@@ -24,3 +37,19 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - app/models/conversation.rb
+
+Rails/FilePath:
+  Exclude:
+    - spec/rails_helper.rb
+
+RSpec/MultipleDescribes:
+  Exclude:
+    - spec/requests/users_spec.rb
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/users/registrations_controller.rb

@@ -1,0 +1,41 @@
+<% if current_user %>
+    <% if current_user.id == @user.id %>
+        <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%; margin-left: auto; margin-right: auto; text-align: center;">
+            <li role="presentation"><a href="/users/<%= @user.id %>/info">Yo</a></li>
+            <li role="presentation" class="active"><a href="#">Mis publicaciones</a></li>
+            <li role="presentation"><a href="/users/<%= @user.id %>/purchased">Mis compras</a></li>
+        </ul>
+    <% else %>
+        <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%; margin-left: auto; margin-right: auto; text-align: center;">
+            <li role="presentation"><a href="/users/<%= @user.id %>/info">Info</a></li>
+            <li role="presentation" class="active"><a href="#">Publicaciones</a></li>
+        </ul>
+    <% end %>
+<% end %>
+
+
+<div class="row" style="width:95%; margin-left: auto; margin-right: auto; margin-top:60px">
+    <% @publications.each do |publication| %>
+        <% if publication.user_id == @user.id %>
+            <div class="col-sm-6 col-md-4" style="width:33%;">
+                <div class="thumbnail" style="border-style:solid; border-width:7px; border-color: black; height:450px;">
+                    <%= image_tag(publication.image, style: " height:220px; width:95%; margin-top:10px; border-style:solid; border-width:medium; border-color: #323233;") %>
+                    <div class="caption">
+                        <h3 style="margin-bottom:1px; margin-top:1px"><strong><%= publication.title %></strong></h3>
+                        <h4 style="margin-bottom:15px; margin-top:1px"><%= publication.typo %></h4>
+                        <p><strong>Especie:</strong> <%= publication.species %></p>
+                        <p><strong>Precio:</strong> <%= publication.price %></p>
+                        <div style="position: absolute;  display: flex;">
+                            <p style=" position: relative;"><a href="/publications/<%= publication.id %>" class="btn btn-primary" role="button">Ver Detalles</a></p>
+                            <% if publication.buyer == -1 %>
+                                <h5 style="position: relative; color:green; margin-left:25px;"><strong>Estado:</strong> Disponible</h5>
+                            <% else %>
+                                <h5 style="position: relative; color:red; margin-left:25px;"><strong>Estado:</strong> Vendido</h5>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end%>
+    <% end%>
+</div>

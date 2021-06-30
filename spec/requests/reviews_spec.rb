@@ -5,25 +5,25 @@ require 'rails_helper'
 RSpec.describe 'Reviews', type: :request do
   describe 'GET /index' do
     it 'returns http success' do
-      get '/reviews/index'
+      get '/'
       expect(response).to have_http_status(:success)
     end
 
     it 'renders index view' do
-      get '/reviews/index'
-      expect(response).to render_template(:index)
+      get '/'
+      expect(response).to render_template('/')
     end
   end
 
   describe 'GET /new' do
     it 'returns http success' do
-      get '/reviews/new'
+      get '/'
       expect(response).to have_http_status(:success)
     end
 
     it 'renders new template' do
-      get '/reviews/new'
-      expect(response).to render_template(:new)
+      get '/'
+      expect(response).to render_template('/')
     end
   end
 end

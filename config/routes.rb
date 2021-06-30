@@ -15,17 +15,17 @@ Rails.application.routes.draw do
   # UPDATE
   get 'solicitudes/:id/edit', to: 'solicitudes#edit', as: 'solicitudes_edit'
   patch 'solicitudes/:id', to: 'solicitudes#update', as: 'solicitudes_update'
+  get 'solicitudes/:id/accepted', to: 'solicitudes#accepted', as: 'solicitudes_accepted'
 
   # DELETE
   delete 'solicitudes/:id', to: 'solicitudes#delete', as: 'solicitudes_delete'
 
   ##################### Reseñas ##################
   # CREATE
-  get 'reviews/new', to: 'reviews#new', as: 'reviews_new'
+  get 'reviews/new/:id_user/:id_reviewed', to: 'reviews#new', as: 'reviews_new'
   post 'reviews', to: 'reviews#create'
 
   # READ
-  get 'reviews/index', to: 'reviews#index', as: 'reviews_index'
   get 'reviews/:id', to: 'reviews#show', as: 'reviews_show'
 
   # UPDATE
@@ -49,7 +49,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions', registrations: 'users/registrations'
   }
   match '/users', to: 'users#index', via: 'get'
-  match '/users/:id', to: 'users#show', via: 'get', as: 'users_show'
+  match '/users/:id/info', to: 'users#show', via: 'get', as: 'users_show'
+  match '/users/:id/posted', to: 'users#show_posted', via: 'get', as: 'users_show_posts'
+  match '/users/:id/purchased', to: 'users#show_purchased', via: 'get', as: 'users_show_purchases'
+  match '/users/:id/saved', to: 'users#show_saved', via: 'get', as: 'users_show_saved'
   get 'welcome/index'
 
   ##################### Publicaciones ##################

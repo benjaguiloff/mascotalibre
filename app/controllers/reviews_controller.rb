@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
-  def index
-    @reviews = Review.all
-    @users = User.all
-  end
-
   def show
     @users = User.all
     @review = Review.find(params[:id])
@@ -13,15 +8,19 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    @review.id_user = params[:id_user]
+    @review.id_reviewed = params[:id_reviewed]
   end
 
   def create
-    @review_params = params.require(:review).permit(:content, :id_user, :id_reviewed)
+    @review_params = params.require(:review).permit(:content, :id_user, :id_reviewed, :rating)
     @review = Review.create(@review_params)
+
     if @review.save
-      redirect_to reviews_index_path, notice: 'Reseña creada correctamente'
+      redirect_to "/users/#{@review_params[:id_reviewed]}/info",
+                  notice: 'Reseña creada correctamente'
     else
-      redirect_to reviews_new_path, notice: 'Error al crear reseña'
+      redirect_to '/', notice: 'Error al crear reseña'
     end
   end
 
@@ -30,10 +29,14 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @reviews_params = params.require(:review).permit(:content, :id_user, :id_reviewed)
+    @reviews_params = params.require(:review).permit(:content)
     @review = Review.find(params[:id])
+    id_user = params[:id_user]
+    id_reviewed = params[:id_reviewed]
+    @reviews_params[:id_user] = id_user.to_i
+    @reviews_params[:id_reviewed] = id_reviewed.to_i
     if @review.update(@reviews_params)
-      redirect_to reviews_index_path, notice: 'Reseña actualizada correctamente'
+      redirect_to '/', notice: 'Reseña actualizada correctamente'
     else
       redirect_to reviews_edit_path(@review.id), notice: 'Error al actualizar la reseña'
     end
@@ -42,6 +45,6 @@ class ReviewsController < ApplicationController
   def delete
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_index_path, notice: 'Reseña eliminada'
+    redirect_to welcome_index_path, notice: 'Reseña eliminada'
   end
 end

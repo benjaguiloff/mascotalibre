@@ -11,13 +11,16 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    @comment.publication_id = params[:publication_id]
   end
 
   def create
-    @comment_params = params.require(:comment).permit(:contents)
+    @comment_params = params.require(:comment).permit(:contents, :publication_id)
+    @comment_params[:user_id] = current_user.id
     @comment = Comment.create(@comment_params)
     if @comment.save
-      redirect_to comments_index_path, notice: 'Comentario creada correctamente'
+      redirect_to publications_show_path(@comment_params[:publication_id]),
+                  notice: 'Comentario creado correctamente'
     else
       redirect_to comments_new_path, notice: 'Error al crear el comentario'
     end

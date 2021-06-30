@@ -1,42 +1,51 @@
-<%= notice %>
+<% if alert %>
+  <div class="alert alert-danger" role="alert" style="margin-top: 5px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= alert %>
+  </div>
+<% end %>
 
-<h1>Nueva publicación</h1>
-
-<%= form_with(model: @publication, method: :post) do |form| %>
+<div class="container" style="width:40%; border-style:solid; border-width:15px; border-color: white; border-radius:5%; background-color: #1F2833;">
+  <div>
+    <h1 style="color:white;"><strong>Crear Publicación</strong></h1> 
+  </div>
+  <%= form_with(model: @publication, method: :post) do |form|  %>
+  
     <div class="field">
-        <%= form.label :Título %>
-        <%= form.text_field :title, autocomplete: "title" %>
+        <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Tipo %><br></h3>
+        <%= form.collection_select :typo, Fake2.all, :typo, :typo %>
     </div>
 
     <div class="field">
-        <%= form.label :Foto %>0
+      <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Título %><br></h3>
+      <%= form.text_field :title, autocomplete: "title" %>
+    </div>
+
+    <div class="field">
+        <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Foto %><br></h3>
         <%= form.file_field :image, autocomplete: "image", :required => true %> 
     </div>
 
     <div class="field">
-        <%= form.label :Especie %>
+        <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Especie %><br></h3>
         <%= form.text_field :species, autocomplete: "species" %>
     </div>
 
-    <div class="field">
-        <%= form.label :Tipo %>
-        <%= form.text_field :typo, autocomplete: "typo" %>
-    </div>
 
     <div class="field">
-        <%= form.label :Precio %>
+        <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Precio %><br></h3>
         <%= form.text_field :price, autocomplete: "price" %>
     </div>
 
     <div class="field">
-        <%= form.label :Dirección %>
+        <h3 style="color:white; margin-top: 25px; margin-bottom: 1px;"><%= form.label :Dirección %><br></h3>
         <%= form.text_field :direction, autocomplete: "direction" %>
     </div>
 
-    <div class="action">
-        <%= form.submit "Crear publicación" %>
+    <div class="actions" style="margin-top: 30px; margin-bottom: 30px; margin-left: auto; margin-right: auto; width:70%; text-align: center;">
+      <%= form.submit "Publicar" %>
     </div>
 
-<%= link_to 'Cancelar', publications_index_path%>
+  <% end %>
 
-<% end %>
+</div>
+  

@@ -10,6 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :image
       t.string :phone
+      t.string :contacts, array: true, default: []
 
       ## Recoverable
       t.string   :reset_password_token

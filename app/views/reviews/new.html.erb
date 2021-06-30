@@ -1,24 +1,45 @@
-<h1>Nueva Reseña</h1>
-<%= form_with(model: @review, method: :post) do |form| %>
-    <div class="field">
-        <h4>Contenido:</h4>
-        <%= form.text_field :content %>
-    </div>
+<div class="container" style="text-align:center; width:65%; border-style:solid; border-width:15px; border-color: white; border-radius:5%; background-color: #1F2833;">
+    <h1 style="color:white">Nueva Reseña</h1>
+    <%= form_with(model: @review, method: :post) do |form| %>
 
-    <div class="field">
-        <h4>Reseña de:</h4>
-        <%= form.collection_select :id_reviewed, User.all, :id, :name %>
-    </div>
+        <%= form.hidden_field :id_reviewed, :id_reviewed => @review.id_reviewed %>
+        <%= form.hidden_field :id_user, :id_user => current_user.id %>
 
-    <div class="field">
-        <h4>Autor de esta reseña: </h4>
-        <%= form.collection_select :id_user, User.all, :id, :name %>
-    </div>
+        <div class="field">
+            <h4 style="color:white">Escribe tu reseña:</h4>
+            <%= form.text_field :content %>
+        </div>
 
-    <h4></h4>
+        <div class="field" style=" margin-left: auto; margin-right: auto; text-align: center;">
+            <table style=" margin-left: auto; margin-right: auto; text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="margin-left: auto; margin-right: auto; text-align: center; color:white"> 1 </th>
+                        <th style="margin-left: auto; margin-right: auto; text-align: center; color:white"> 2 </th>
+                        <th style="margin-left: auto; margin-right: auto; text-align: center; color:white"> 3 </th>
+                        <th style="margin-left: auto; margin-right: auto; text-align: center; color:white"> 4 </th>
+                        <th style="margin-left: auto; margin-right: auto; text-align: center; color:white"> 5 </th>
+                    </tr>
+                </thead>
 
-    <div class="action">
-        <%= form.submit "Crear reseña"%>
-    </div>
+                <tbody>
+                    <tr>
+                    
+                        <td> <button type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <%= form.radio_button :rating, 1 %> </button> </td>
+                        <td> <button type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <%= form.radio_button :rating, 2 %> </button> </td>
+                        <td> <button type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <%= form.radio_button :rating, 3 %> </button> </td>
+                        <td> <button type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <%= form.radio_button :rating, 4 %> </button> </td>
+                        <td> <button type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <%= form.radio_button :rating, 5 %> </button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<% end %>
+        <h4></h4>
+
+        <div class="action">
+            <%= form.submit "Crear reseña"%>
+        </div>
+
+    <% end %>
+</div>
