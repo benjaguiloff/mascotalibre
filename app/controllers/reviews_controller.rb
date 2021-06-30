@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
-
   def show
     @users = User.all
     @review = Review.find(params[:id])
@@ -9,8 +8,8 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
-    @review.id_user =  params[:id_user]
-    @review.id_reviewed =  params[:id_reviewed]
+    @review.id_user = params[:id_user]
+    @review.id_reviewed = params[:id_reviewed]
   end
 
   def create
@@ -18,9 +17,10 @@ class ReviewsController < ApplicationController
     @review = Review.create(@review_params)
 
     if @review.save
-      redirect_to "/users/#{@review_params[:id_reviewed]}/info", notice: 'Reseña creada correctamente'
+      redirect_to "/users/#{@review_params[:id_reviewed]}/info",
+                  notice: 'Reseña creada correctamente'
     else
-      redirect_to "/", notice: 'Error al crear reseña'
+      redirect_to '/', notice: 'Error al crear reseña'
     end
   end
 
@@ -36,7 +36,7 @@ class ReviewsController < ApplicationController
     @reviews_params[:id_user] = id_user.to_i
     @reviews_params[:id_reviewed] = id_reviewed.to_i
     if @review.update(@reviews_params)
-      redirect_to "/", notice: 'Reseña actualizada correctamente'
+      redirect_to '/', notice: 'Reseña actualizada correctamente'
     else
       redirect_to reviews_edit_path(@review.id), notice: 'Error al actualizar la reseña'
     end

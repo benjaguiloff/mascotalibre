@@ -19,10 +19,10 @@ class PublicationsController < ApplicationController
   def create
     @publication_params = params.require(:publication).permit(:title, :image, :species, :typo,
                                                               :price, :direction)
-    @publication_params[:user_id] =  current_user.id
+    @publication_params[:user_id] = current_user.id
     @publication = Publication.create(@publication_params)
     if @publication.save
-      redirect_to "/", notice: 'Publicación creada correctamente'
+      redirect_to '/', notice: 'Publicación creada correctamente'
     else
       redirect_to publications_new_path, notice: 'Error al crear la publicación'
     end
@@ -61,6 +61,6 @@ class PublicationsController < ApplicationController
   def delete
     @publication = Publication.find(params[:id])
     @publication.destroy
-    redirect_to "/", notice: 'La publicación ha sido eliminada'
+    redirect_to '/', notice: 'La publicación ha sido eliminada'
   end
 end

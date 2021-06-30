@@ -11,7 +11,7 @@ RSpec.describe 'Reviews', type: :request do
 
     it 'renders index view' do
       get '/'
-      expect(response).to render_template("/")
+      expect(response).to render_template('/')
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe 'Reviews', type: :request do
 
     it 'renders new template' do
       get '/'
-      expect(response).to render_template("/")
+      expect(response).to render_template('/')
     end
   end
 end

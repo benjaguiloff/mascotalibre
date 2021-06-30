@@ -33,7 +33,7 @@
 <% puntaje = 0 %>
 <% cantidad = 0 %>
 <% @reviews.each do |review| %>
-    <% if review.id_reviewed == @user.id %>
+    <% if review.id_reviewed == @user.id && review.rating %>
         <% puntaje = puntaje + review.rating %>
         <% cantidad = cantidad + 1 %>
     <% end %>

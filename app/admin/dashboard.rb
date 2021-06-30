@@ -1,22 +1,24 @@
-ActiveAdmin.register_page "Dashboard" do
-  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
+# frozen_string_literal: true
 
-  content title: proc { I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
+
+  content title: proc { I18n.t('active_admin.dashboard') } do
+    div class: 'blank_slate_container', id: 'dashboard_default_message' do
+      span class: 'blank_slate' do
+        span I18n.t('active_admin.dashboard_welcome.welcome')
+        small I18n.t('active_admin.dashboard_welcome.call_to_action')
       end
     end
 
     # Here is an example of a simple dashboard with columns and panels.
-    
+
     columns do
       column do
-        panel "Recent Posts" do
+        panel 'Recent Posts' do
           ul do
             Publication.all.map do |post|
-              if post.accepted == "false"
+              if post.accepted == 'false'
                 li link_to(post.title, publications_edit_admin_path(post))
               else
                 li "#{post.title} (aceptada)"
@@ -27,10 +29,10 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       column do
-        panel "Info" do
-          para "Welcome to ActiveAdmin."
+        panel 'Info' do
+          para 'Welcome to ActiveAdmin.'
         end
       end
     end
-  end # content
+  end
 end
