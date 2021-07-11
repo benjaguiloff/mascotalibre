@@ -1,6 +1,6 @@
 # grupo-56
 
-El link de nuestra app montada en Heroku  es: https://shielded-chamber-42629.herokuapp.com/
+El link de nuestra app montada en Heroku  es: https://mascota-libre.herokuapp.com/
 
 Para ingresar a la cuenta de admin:
 
