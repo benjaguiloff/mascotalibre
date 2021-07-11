@@ -76,3 +76,4 @@ gem 'paperclip'
 
 gem 'activeadmin', '~> 2.9'
 gem 'simplecov', '~> 0.21.2'
+gem "aws-sdk-s3", require: false
