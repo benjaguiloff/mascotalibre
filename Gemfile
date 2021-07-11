@@ -75,5 +75,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'paperclip'
 
 gem 'activeadmin', '~> 2.9'
+gem 'aws-sdk-s3', require: false
 gem 'simplecov', '~> 0.21.2'
-gem "aws-sdk-s3", require: false
